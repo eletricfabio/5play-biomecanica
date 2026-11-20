@@ -9,12 +9,11 @@ from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 def build_postgres_dsn() -> str:
     database_url = os.getenv("DATABASE_URL", "").strip()
     if database_url:
-        if database_url.startswith("postgres://"):
-            database_url = "postgresql+psycopg://" + database_url[len("postgres://") :]
-        elif database_url.startswith("postgresql://"):
-            database_url = "postgresql+psycopg://" + database_url[len("postgresql://") :]
-
         parsed = urlsplit(database_url)
+        scheme = parsed.scheme.lower()
+        if scheme in ("postgres", "postgresql"):
+            scheme = "postgresql+psycopg"
+
         filtered_query = [
             (key, value)
             for key, value in parse_qsl(parsed.query, keep_blank_values=True)
@@ -22,7 +21,7 @@ def build_postgres_dsn() -> str:
         ]
         return urlunsplit(
             (
-                parsed.scheme,
+                scheme,
                 parsed.netloc,
                 parsed.path,
                 urlencode(filtered_query),
