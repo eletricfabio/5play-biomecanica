@@ -1,0 +1,372 @@
+<!DOCTYPE html><html class="dark" lang="pt-BR"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_stack" name="shell-type"><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#0f131c;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary-fixed": "#6ffbbe", "on-secondary-fixed-variant": "#004e5c", "tertiary-container": "#e29100", "primary-container": "#10b981", "surface-bright": "#353942", "inverse-primary": "#006c49", "tertiary": "#ffb95f", "on-surface-variant": "#bbcabf", "surface-container-low": "#181c24", "on-tertiary-fixed": "#2a1700", "on-primary-container": "#00422b", "surface": "#0f131c", "background": "#0f131c", "error": "#ffb4ab", "on-primary-fixed": "#002113", "on-error-container": "#ffdad6", "secondary": "#4cd7f6", "surface-variant": "#31353e", "on-surface": "#dfe2ee", "inverse-surface": "#dfe2ee", "on-secondary-container": "#00424e", "on-background": "#dfe2ee", "outline": "#86948a", "on-secondary": "#003640", "surface-dim": "#0f131c", "surface-tint": "#4edea3", "tertiary-fixed": "#ffddb8", "surface-container": "#1c2028", "on-tertiary": "#472a00", "outline-variant": "#3c4a42", "primary-fixed-dim": "#4edea3", "on-tertiary-container": "#523200", "secondary-container": "#03b5d3", "on-tertiary-fixed-variant": "#653e00", "error-container": "#93000a", "on-primary-fixed-variant": "#005236", "primary": "#4edea3", "tertiary-fixed-dim": "#ffb95f", "surface-container-high": "#262a33", "surface-container-lowest": "#0a0e16", "on-error": "#690005", "inverse-on-surface": "#2c3039", "secondary-fixed": "#acedff", "secondary-fixed-dim": "#4cd7f6", "surface-container-highest": "#31353e", "on-primary": "#003824", "on-secondary-fixed": "#001f26" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "gutter": "1rem", "space-xs": "0.25rem", "space-md": "1rem", "margin": "1rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "space-lg": "1.5rem", "margin-desktop": "2rem", "gutter-desktop": "1.5rem" }, fontFamily: { "label-md": ["JetBrains Mono"], "label-lg": ["JetBrains Mono"], "label-sm": ["JetBrains Mono"], "headline-md": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "body-lg": ["Inter"], "body-sm": ["Inter"], "headline-xl": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "body-md": ["Inter"], "headline-xl-mobile": ["Space Grotesk"] }, fontSize: { "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "500" }], "label-lg": ["14px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "500" }], "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "600" }], "headline-md": ["22px", { lineHeight: "28px", fontWeight: "600" }], "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }], "headline-xl": ["40px", { lineHeight: "48px", letterSpacing: "-0.03em", fontWeight: "700" }], "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }], "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "headline-xl-mobile": ["30px", { lineHeight: "38px", letterSpacing: "-0.02em", fontWeight: "700" }] } } } }</script></head><body class="bg-surface text-on-surface font-body-md flex flex-col min-h-screen selection:bg-primary selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="h-14 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Voltar" class="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back_ios_new</span></button><img alt="Logo insta perfil BR.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDwy9BpXjlF9EUiFgecIh9Y5V0T9FVlQS9AZ9WGdMj2UnxbUQgGACEnAJh-9uCVukOrDns71DZuqhCxgknSc06Axso7010amR8D_wjKzRBJ6SXZu7ML_VvKT1QgfLd5yilIIbtGSt_OJSRgyCMBQIf659GtC7uEfLlixWpQ5N8Qs26B-VJruIw9rOJKQUbHaWhm3mgDtkbxmPHNWze9FR2Edt6lqDbS1IuWAdX3rvqPnYz26GZSWiW7L-Jv"><h1 class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">Pitch Cam Live</h1></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-14 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full relative select-none">
+<!-- Viewport da Câmera Esportiva com Fundo Hiper-Realista -->
+<div class="relative w-full aspect-[9/18] max-h-[820px] overflow-hidden bg-surface-container-lowest">
+<!-- Background do Gramado sob Holofotes (Stream Live da Câmera) -->
+
+<!-- Scrim & Grid Cinematográfico com Gradiente HUD -->
+<div class="absolute inset-0 bg-gradient-to-b from-surface-container-lowest/80 via-transparent to-surface-container-lowest/90 pointer-events-none"></div>
+<!-- HUD Óptico: Linha de Horizonte e Perspectiva de Campo -->
+<div class="absolute inset-x-0 top-1/2 -translate-y-12 flex flex-col items-center pointer-events-none opacity-80">
+<div class="w-full flex items-center justify-between px-space-md">
+<div class="h-[1px] w-20 bg-secondary/40 shadow-[0_0_8px_rgba(76,215,246,0.5)]"></div>
+<div class="flex items-center gap-space-xs px-2 py-0.5 rounded-full bg-surface-container-lowest/70 backdrop-blur-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">NÍVEL: 0.2° • PERSPECTIVA ÓPTICA OK</span>
+</div>
+<div class="h-[1px] w-20 bg-secondary/40 shadow-[0_0_8px_rgba(76,215,246,0.5)]"></div>
+</div>
+<!-- Guias Radiais de Perspectiva da Grama -->
+<svg class="w-full h-40 opacity-30 stroke-secondary" fill="none" viewBox="0 0 360 160">
+<path d="M40 160 L140 20 M320 160 L220 20" stroke-dasharray="3 3" stroke-width="1"></path>
+<path d="M110 160 L160 20 M250 160 L200 20" stroke-dasharray="2 4" stroke-width="0.75"></path>
+</svg>
+</div>
+<!-- Esqueleto Cinemático IA de 22 Pontos (Overlay KinePitch) -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none pt-8">
+<div class="relative w-64 h-[440px] flex items-center justify-center">
+<!-- Moldura Holográfica de Posicionamento -->
+<div class="absolute inset-0 rounded-xl border border-dashed border-secondary/30 bg-secondary/5">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-surface-container-high/90 backdrop-blur-md shadow-sm">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-tight">Posicione o Atleta Dentro da Moldura</span>
+</div>
+<!-- Marcadores de Canto HUD -->
+<div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary"></div>
+<div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-primary"></div>
+<div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-primary"></div>
+<div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-primary"></div>
+</div>
+<!-- SVG do Esqueleto Articular Biomecânico de 22 Pontos -->
+<svg class="w-full h-full overflow-visible" fill="none" viewBox="0 0 240 400">
+<!-- Vetores / Conexões Articulares Neon -->
+<g class="opacity-90" stroke="#4cd7f6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+<!-- Coluna / Tronco -->
+<line x1="120" x2="120" y1="70" y2="105"></line>
+<line x1="120" x2="120" y1="105" y2="180"></line>
+<!-- Ombros & Clavícula -->
+<line x1="90" x2="150" y1="105" y2="105"></line>
+<!-- Braço Esquerdo -->
+<line x1="90" x2="68" y1="105" y2="150"></line>
+<line stroke-dasharray="2 2" x1="68" x2="52" y1="150" y2="195"></line>
+<!-- Braço Direito (Em Apoio de Chute) -->
+<line x1="150" x2="175" y1="105" y2="148"></line>
+<line x1="175" x2="195" y1="148" y2="185"></line>
+<!-- Bacia / Pelve -->
+<line x1="100" x2="140" y1="180" y2="180"></line>
+<line x1="120" x2="100" y1="180" y2="180"></line>
+<line x1="120" x2="140" y1="180" y2="180"></line>
+<!-- Perna de Apoio (Esquerda) -->
+<line stroke="#4edea3" stroke-width="2.2" x1="100" x2="94" y1="180" y2="260"></line>
+<line stroke="#4edea3" stroke-width="2.2" x1="94" x2="92" y1="260" y2="350"></line>
+<line x1="92" x2="78" y1="350" y2="370"></line>
+<!-- Perna de Golpeio / Flexionada (Direita) -->
+<line stroke="#ffb95f" stroke-width="2.2" x1="140" x2="162" y1="180" y2="252"></line>
+<line stroke="#ffb95f" stroke-width="2.2" x1="162" x2="135" y1="252" y2="330"></line>
+<line x1="135" x2="150" y1="330" y2="355"></line>
+</g>
+<!-- 22 Nós Articulares Concêntricos (Joints) -->
+<g fill="#0f131c" stroke="#4cd7f6" stroke-width="1.5">
+<!-- Cabeça & Pescoço -->
+<circle cx="120" cy="50" fill="none" r="14" stroke="#4edea3" stroke-dasharray="2 3" stroke-width="1"></circle>
+<circle cx="120" cy="50" fill="#4edea3" r="3"></circle>
+<circle cx="120" cy="70" r="2.5"></circle>
+<!-- Ombros (2) -->
+<circle cx="90" cy="105" fill="#acedff" r="3.5"></circle>
+<circle cx="150" cy="105" fill="#acedff" r="3.5"></circle>
+<!-- Cotovelos (2) -->
+<circle cx="68" cy="150" r="3"></circle>
+<circle cx="175" cy="148" r="3"></circle>
+<!-- Punhos e Mãos (4) -->
+<circle cx="52" cy="195" r="2.5"></circle>
+<circle cx="48" cy="205" r="1.5"></circle>
+<circle cx="195" cy="185" r="2.5"></circle>
+<circle cx="202" cy="195" r="1.5"></circle>
+<!-- Espinha Lombar & Sacro (2) -->
+<circle cx="120" cy="140" r="2"></circle>
+<circle cx="120" cy="180" r="3"></circle>
+<!-- Quadris (2) -->
+<circle cx="100" cy="180" fill="#4edea3" r="4"></circle>
+<circle cx="140" cy="180" fill="#ffb95f" r="4"></circle>
+<!-- Joelhos (2) -->
+<circle cx="94" cy="260" fill="#4edea3" r="4"></circle>
+<circle cx="162" cy="252" fill="#ffb95f" r="4"></circle>
+<!-- Tornozelos (2) -->
+<circle cx="92" cy="350" fill="#4edea3" r="3.5"></circle>
+<circle cx="135" cy="330" fill="#ffb95f" r="3.5"></circle>
+<!-- Calcanhares & Dedos (4) -->
+<circle cx="86" cy="365" r="2"></circle>
+<circle cx="78" cy="370" r="2.5"></circle>
+<circle cx="142" cy="345" r="2"></circle>
+<circle cx="150" cy="355" r="2.5"></circle>
+</g>
+<!-- Arcos de Calibração Angular Dinâmica -->
+<g>
+<!-- Ângulo de Joelho Esquerdo (Apoio) -->
+<path d="M 85 245 A 20 20 0 0 1 105 272" fill="none" stroke="#4edea3" stroke-width="1.5"></path>
+<!-- Tag Flutuante Joelho -->
+<rect fill="#0a0e16" fill-opacity="0.85" height="20" rx="3" width="76" x="8" y="244"></rect>
+<text fill="#4edea3" font-family="JetBrains Mono" font-size="9" font-weight="600" x="12" y="258">JOELHO: 154°</text>
+<line stroke="#4edea3" stroke-dasharray="1 2" stroke-width="1" x1="84" x2="94" y1="254" y2="260"></line>
+<!-- Ângulo de Quadril Direito (Flexão de Ataque) -->
+<path d="M 148 195 A 18 18 0 0 1 154 220" fill="none" stroke="#ffb95f" stroke-width="1.5"></path>
+<!-- Tag Flutuante Quadril -->
+<rect fill="#0a0e16" fill-opacity="0.85" height="20" rx="3" width="76" x="156" y="174"></rect>
+<text fill="#ffb95f" font-family="JetBrains Mono" font-size="9" font-weight="600" x="160" y="188">QUADRIL: 112°</text>
+<line stroke="#ffb95f" stroke-dasharray="1 2" stroke-width="1" x1="156" x2="140" y1="184" y2="180"></line>
+</g>
+</svg>
+<!-- Pílula Central de Reconhecimento Biomecânico Ativo -->
+<div class="absolute -bottom-4 inset-x-2 flex items-center justify-center pointer-events-auto">
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-lowest/85 backdrop-blur-md shadow-lg">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span class="font-label-sm text-label-sm text-on-surface truncate">
+              IA KinePitch: <span class="text-primary font-bold">Rastreamento 99.4%</span> (Sem Sensores)
+            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- HUD Flutuante Superior -->
+<div class="absolute top-0 inset-x-0 p-margin flex flex-col gap-space-sm z-20 pointer-events-auto">
+<!-- Linha 1: Perfil do Atleta Selecionado + Telemetria de Câmera -->
+<div class="flex items-center justify-between gap-space-sm">
+<!-- Dropdown Seletor do Atleta -->
+<button class="flex items-center gap-space-xs px-2.5 py-1.5 rounded-full bg-surface-container-high/80 backdrop-blur-lg active:scale-95 transition-transform text-left" id="athlete-select-btn">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<span class="font-headline-sm text-[11px] font-bold text-on-secondary-container">MH</span>
+</div>
+<div class="flex flex-col min-w-0 pr-1">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate max-w-[130px]">M. Henrique</span>
+<span class="font-label-sm text-[9px] px-1 rounded bg-primary-container text-on-primary-container font-bold">SUB-17</span>
+</div>
+<span class="font-body-sm text-[10px] text-on-surface-variant leading-none">Camisa #10 • Atacante</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span>
+</button>
+<!-- Indicador de Resolução & Latência NPU -->
+<div class="flex items-center gap-1.5">
+<div class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container-lowest/70 backdrop-blur-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary font-bold">60 FPS</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">• 4K</span>
+</div>
+<div class="hidden sm:flex items-center px-1.5 py-1 rounded bg-surface-container-lowest/60">
+<span class="font-label-sm text-label-sm text-secondary">NPU: 12ms</span>
+</div>
+<!-- Botão Flash/Lanterna Auxiliar -->
+<button aria-label="Ativar Lanterna Auxiliar de Campo" class="w-8 h-8 rounded-full bg-surface-container-high/80 backdrop-blur-md flex items-center justify-center text-on-surface active:bg-tertiary-container active:text-on-tertiary-container transition-colors" id="flash-toggle-btn">
+<span class="material-symbols-outlined text-[18px]" id="flash-icon">flash_on</span>
+</button>
+</div>
+</div>
+<!-- Linha 2: Carrossel Tátil de Seleção de Tipo de Teste & Zoom -->
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+<button class="px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-md text-label-md font-bold flex items-center gap-1 shadow-sm shrink-0">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+            Finalização
+          </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container-high/70 backdrop-blur-md text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-medium shrink-0 active:scale-95 transition-all">
+            Sprint 20m
+          </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container-high/70 backdrop-blur-md text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-medium shrink-0 active:scale-95 transition-all">
+            Salto Vertical
+          </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container-high/70 backdrop-blur-md text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-medium shrink-0 active:scale-95 transition-all">
+            1v1 Agilidade
+          </button>
+</div>
+<!-- Seletor de Lentes (0.5x, 1x, 2x) -->
+<div class="flex items-center p-0.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md shrink-0">
+<button class="w-6 h-6 rounded-full text-center font-label-sm text-[10px] text-on-surface-variant hover:text-on-surface">0.5</button>
+<button class="w-6 h-6 rounded-full bg-surface-bright text-center font-label-sm text-[10px] text-primary font-bold shadow-xs">1x</button>
+<button class="w-6 h-6 rounded-full text-center font-label-sm text-[10px] text-on-surface-variant hover:text-on-surface">2x</button>
+</div>
+</div>
+<!-- Linha 3: Telemetria Estática de Campo e Distância -->
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm px-1">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">straighten</span>
+<span>DISTÂNCIA ESTIMADA: <strong class="text-on-surface">5.4m</strong></span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">blur_linear</span>
+<span>CALIBRAÇÃO PITCH: <strong class="text-primary font-bold">ATIVA</strong></span>
+</div>
+</div>
+</div>
+<!-- Controles de Gravação e Disparo (HUD Inferior na Tela de Câmera) -->
+<div class="absolute bottom-4 inset-x-0 px-margin flex flex-col items-center gap-3 z-20 pointer-events-auto">
+<!-- Contador de Tempo / Modo Pronto -->
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md" id="recording-timer">
+<span class="w-2 h-2 rounded-full bg-error" id="rec-dot"></span>
+<span class="font-label-md text-label-md text-on-surface font-semibold tracking-wider" id="rec-timer-text">00:00</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">/ MAX 30s</span>
+</div>
+<!-- Botões de Ação Principal: Galeria | REC Trigger | Calibração -->
+<div class="w-full flex items-center justify-around max-w-sm">
+<!-- Botão Importar Galeria -->
+<button class="flex flex-col items-center gap-1 group active:scale-90 transition-transform">
+<div class="w-12 h-12 rounded-full bg-surface-container-high/80 backdrop-blur-md flex items-center justify-center text-on-surface group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">video_library</span>
+</div>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-tight">Importar</span>
+</button>
+<!-- Botão Principal Disparador de Gravação Biomecânica -->
+<button aria-label="Gravar Biomecânica" class="relative group active:scale-95 transition-transform" id="rec-button">
+<!-- Anel Radiante Pulsante -->
+<div class="absolute -inset-2 rounded-full bg-error/20 group-hover:bg-error/30 animate-ping pointer-events-none"></div>
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center shadow-2xl">
+<!-- Núcleo Vermelho / Stop Square -->
+<div class="w-16 h-16 rounded-full bg-error flex items-center justify-center transition-all duration-300 shadow-[0_0_20px_rgba(255,180,171,0.4)]" id="rec-core">
+<div class="w-5 h-5 rounded-full bg-white opacity-40"></div>
+</div>
+</div>
+</button>
+<!-- Botão Calibrar Gramado / Marcadores 3D -->
+<button class="flex flex-col items-center gap-1 group active:scale-90 transition-transform">
+<div class="w-12 h-12 rounded-full bg-surface-container-high/80 backdrop-blur-md flex items-center justify-center text-on-surface group-hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-[22px]">view_in_ar</span>
+</div>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-tight">Calibrar</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Drawer / Sheet de Telemetria e Fila de Análise Biomecânica -->
+<div class="w-full bg-surface-container-low px-margin pt-space-sm pb-space-lg flex flex-col gap-space-sm shadow-xl">
+<!-- Puxador Tátil do Drawer -->
+<div class="w-full flex items-center justify-center pt-1 pb-2">
+<div class="w-12 h-1 rounded-full bg-surface-bright"></div>
+</div>
+<!-- Cabeçalho do Drawer com Status de Processamento em Nuvem -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">cloud_sync</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Processamento KinePitch</h2>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-semibold">2 NA FILA DE NUVEM</span>
+</div>
+</div>
+<!-- Lista de Análises Recentes (Cards de Telemetria) -->
+<div class="flex flex-col gap-space-sm">
+<!-- Card 1: Em Processamento IA Ativo (82%) -->
+<div class="w-full p-space-sm rounded-xl bg-surface-container flex flex-col gap-2 relative overflow-hidden">
+<!-- Indicador Lateral Neon Cyan -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex items-center justify-between gap-space-sm pl-1">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[20px]">sports_soccer</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-body-md font-semibold text-on-surface truncate">Finalização_03_LucasSilveira.mp4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Vídeo 1080p60 • Ângulos Articulares &amp; Potência</span>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-secondary shrink-0">82%</span>
+</div>
+<!-- Barra de Progresso com Glow Neon -->
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden ml-1">
+<div class="h-full bg-secondary rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(76,215,246,0.6)]" style="width: 82%;"></div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm pl-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">memory</span>
+            Calculando Vetores de Reação ao Solo...
+          </span>
+<span>Tempo Restante: ~4s</span>
+</div>
+</div>
+<!-- Card 2: Concluído com Índice de Potência Biomecânica (IPB) -->
+<div class="w-full p-space-sm rounded-xl bg-surface-container flex items-center justify-between gap-space-sm relative overflow-hidden">
+<!-- Indicador Lateral Verde Concluído -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center gap-space-sm min-w-0 pl-1">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]">directions_run</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-body-md text-body-md font-semibold text-on-surface truncate">Sprint20m_MatheusH.mp4</span>
+<span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Concluído há 6 min • 4K 60FPS</span>
+</div>
+</div>
+<!-- Badge Score IPB -->
+<div class="flex flex-col items-end shrink-0">
+<div class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-md text-label-md font-bold flex items-center gap-1">
+<span>IPB 88</span>
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+</div>
+<span class="font-label-sm text-[9px] text-primary uppercase font-semibold mt-0.5">Ótima Cadência</span>
+</div>
+</div>
+<!-- Quick Action: Acessar Relatório Completo -->
+<button class="w-full py-2.5 rounded-lg bg-surface-container-high text-on-surface hover:text-primary font-body-md text-body-md font-semibold flex items-center justify-center gap-space-xs active:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+<span>Abrir Painel Cinemático Completo do Atleta</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    let recording = false;
+    let timerInterval = null;
+    let seconds = 0;
+    
+    const recButton = document.getElementById('rec-button');
+    const recCore = document.getElementById('rec-core');
+    const recDot = document.getElementById('rec-dot');
+    const recTimerText = document.getElementById('rec-timer-text');
+    const flashBtn = document.getElementById('flash-toggle-btn');
+    const flashIcon = document.getElementById('flash-icon');
+    let flashActive = false;
+
+    if (recButton) {
+      recButton.addEventListener('click', () => {
+        recording = !recording;
+        if (recording) {
+          recCore.classList.remove('rounded-full', 'bg-error');
+          recCore.classList.add('rounded-md', 'w-8', 'h-8', 'bg-error');
+          recDot.classList.add('animate-ping');
+          seconds = 0;
+          timerInterval = setInterval(() => {
+            seconds++;
+            const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+            const secs = String(seconds % 60).padStart(2, '0');
+            recTimerText.textContent = `${mins}:${secs}`;
+            if (seconds >= 30) {
+              recButton.click();
+            }
+          }, 1000);
+        } else {
+          recCore.classList.add('rounded-full', 'bg-error', 'w-16', 'h-16');
+          recCore.classList.remove('rounded-md', 'w-8', 'h-8');
+          recDot.classList.remove('animate-ping');
+          clearInterval(timerInterval);
+          recTimerText.textContent = '00:00';
+        }
+      });
+    }
+
+    if (flashBtn) {
+      flashBtn.addEventListener('click', () => {
+        flashActive = !flashActive;
+        if (flashActive) {
+          flashBtn.classList.add('bg-tertiary', 'text-on-tertiary');
+          flashIcon.textContent = 'flash_on';
+        } else {
+          flashBtn.classList.remove('bg-tertiary', 'text-on-tertiary');
+          flashIcon.textContent = 'flash_off';
+        }
+      });
+    }
+  })();
+</script></main></body></html>

@@ -1,0 +1,6 @@
+{
+  "name": "5Play Sports - KinePitch AI",
+  "description": "Plataforma SaaS de biomecânica 3D, scouting esportivo e governança LGPD para clubes e categorias de base no futebol.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"inverse-surface":"#dfe2ee","secondary-fixed-dim":"#4cd7f6","tertiary-fixed":"#ffddb8","surface-container":"#1c2028","on-secondary-container":"#00424e","on-primary-fixed":"#002113","surface-dim":"#0f131c","primary-container":"#10b981","primary":"#4edea3","surface-container-high":"#262a33","on-error-container":"#ffdad6","on-primary":"#003824","secondary":"#4cd7f6","outline":"#86948a","on-primary-fixed-variant":"#005236","tertiary":"#ffb95f","on-tertiary-fixed-variant":"#653e00","inverse-primary":"#006c49","surface-variant":"#31353e","error-container":"#93000a","secondary-fixed":"#acedff","on-secondary":"#003640","surface-bright":"#353942","on-primary-container":"#00422b","on-secondary-fixed-variant":"#004e5c","inverse-on-surface":"#2c3039","background":"#0f131c","on-error":"#690005","on-tertiary":"#472a00","error":"#ffb4ab","on-tertiary-fixed":"#2a1700","tertiary-fixed-dim":"#ffb95f","surface":"#0f131c","surface-tint":"#4edea3","on-surface-variant":"#bbcabf","on-tertiary-container":"#523200","primary-fixed":"#6ffbbe","surface-container-highest":"#31353e","secondary-container":"#03b5d3","surface-container-low":"#181c24","outline-variant":"#3c4a42","on-background":"#dfe2ee","on-secondary-fixed":"#001f26","surface-container-lowest":"#0a0e16","primary-fixed-dim":"#4edea3","tertiary-container":"#e29100","on-surface":"#dfe2ee"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"gutter":"1rem","space-lg":"1.5rem","space-sm":"0.5rem","margin-desktop":"2rem","margin":"1rem","space-md":"1rem","gutter-desktop":"1.5rem","space-xl":"2.5rem","space-xs":"0.25rem"},"fontFamily":{"label-lg":["JetBrains Mono"],"headline-lg":["Space Grotesk"],"body-sm":["Inter"],"body-lg":["Inter"],"headline-sm":["Space Grotesk"],"headline-lg-mobile":["Space Grotesk"],"label-sm":["JetBrains Mono"],"body-md":["Inter"],"headline-md":["Space Grotesk"],"label-md":["JetBrains Mono"],"headline-xl":["Space Grotesk"],"headline-xl-mobile":["Space Grotesk"]},"fontSize":{"label-lg":["14px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-md":["22px",{"lineHeight":"28px","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.03em","fontWeight":"700"}],"headline-xl-mobile":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-screen w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex flex-col"><div class="px-space-md py-space-md bg-surface-container-low/40 flex items-center gap-space-sm"><img alt="Logo insta perfil BR.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDwy9BpXjlF9EUiFgecIh9Y5V0T9FVlQS9AZ9WGdMj2UnxbUQgGACEnAJh-9uCVukOrDns71DZuqhCxgknSc06Axso7010amR8D_wjKzRBJ6SXZu7ML_VvKT1QgfLd5yilIIbtGSt_OJSRgyCMBQIf659GtC7uEfLlixWpQ5N8Qs26B-VJruIw9rOJKQUbHaWhm3mgDtkbxmPHNWze9FR2Edt6lqDbS1IuWAdX3rvqPnYz26GZSWiW7L-Jv"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight truncate">5PLAY SPORTS</span><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary truncate">KinePitch AI Pro</span></div></div></div><div class="px-space-md pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">Sistemas de Análise</span></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-surface-container-high text-primary font-bold rounded-lg"><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="dashboard-geral" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-body-md text-body-md">Dashboard Geral</span></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant group-hover:text-on-surface">LIVE</span></a><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="atletas-e-elenco" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">groups</span><span class="font-body-md text-body-md">Atletas &amp; Elenco</span></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">34</span></a><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="clubes-e-parceiros" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">shield</span><span class="font-body-md text-body-md">Clubes &amp; Parceiros</span></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">8</span></a><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="analise-biomecanica-3d" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] text-secondary">accessibility_new</span><span class="font-body-md text-body-md">Análise Biomecânica 3D</span></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-secondary/10 text-secondary font-semibold">LIVE</span></a><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="relatorios-de-scouting" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="font-body-md text-body-md">Relatórios de Scouting</span></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">12</span></a><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="configuracoes" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">tune</span><span class="font-body-md text-body-md">Configurações</span></div></a></nav></div><div class="flex flex-col gap-space-sm p-space-md bg-surface-container-lowest"><div class="rounded-lg bg-surface-container-low p-space-sm flex flex-col gap-1"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Status de Sensores</span><span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span></div><span class="font-label-sm text-label-sm text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">speed</span>GPU Tracking Online • 60 FPS</span></div><div class="flex items-center justify-between pt-space-xs"><div class="flex items-center gap-space-sm min-w-0"><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 text-on-surface"><span class="material-symbols-outlined text-[18px]">biotech</span></div><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-surface font-semibold truncate">Dr. Fisiologista Chefe</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Head Scout &amp; Performance</span></div></div><span class="material-symbols-outlined text-outline text-[18px]">verified</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.15)] z-40 flex items-center justify-between px-space-lg gap-space-md"><div class="flex items-center gap-space-md flex-1 max-w-2xl"><img alt="Logo insta perfil BR.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDwy9BpXjlF9EUiFgecIh9Y5V0T9FVlQS9AZ9WGdMj2UnxbUQgGACEnAJh-9uCVukOrDns71DZuqhCxgknSc06Axso7010amR8D_wjKzRBJ6SXZu7ML_VvKT1QgfLd5yilIIbtGSt_OJSRgyCMBQIf659GtC7uEfLlixWpQ5N8Qs26B-VJruIw9rOJKQUbHaWhm3mgDtkbxmPHNWze9FR2Edt6lqDbS1IuWAdX3rvqPnYz26GZSWiW7L-Jv"/><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg"><span class="material-symbols-outlined text-outline text-[18px]">category</span><select aria-label="Seletor de Categoria" class="bg-transparent font-label-md text-label-md text-on-surface focus:outline-none cursor-pointer pr-space-xs"><option class="bg-surface-container" value="sub20">Sub-20</option><option class="bg-surface-container" value="prof">Profissional</option><option class="bg-surface-container" value="sub17">Sub-17</option><option class="bg-surface-container" value="sub15">Sub-15</option><option class="bg-surface-container" value="sub13">Sub-13</option><option class="bg-surface-container" value="sub11">Sub-11</option></select></div><div class="flex-1 relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">search</span><input class="w-full bg-surface-container-low pl-9 pr-14 py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container transition-all" placeholder="Buscar atleta por nome, ID ou posição..." type="text"/><kbd class="absolute right-2 font-label-sm text-label-sm text-outline bg-surface-container-high px-1.5 py-0.5 rounded">⌘K</kbd></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-md text-on-surface-variant"><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Sync Telemetria:</span><span class="font-label-md text-label-md text-on-surface font-semibold">99.8%</span></div><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-tertiary text-[18px]">warning</span><span class="font-label-sm text-label-sm text-tertiary">2 Alertas Carga</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Notificações e Alertas" class="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-all relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-tertiary"></span></button><button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-headline-sm font-semibold shadow-[0_0_16px_rgba(16,185,129,0.35)] hover:shadow-[0_0_24px_rgba(16,185,129,0.55)] transition-all cursor-pointer"><span class="material-symbols-outlined text-[18px]">video_call</span><span>+ Nova Análise de Vídeo</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 w-full px-gutter-desktop min-h-screen bg-background"><div class="flex flex-col w-full pb-space-xl">
+<!-- Top Breadcrumb & Actions Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-2 text-outline font-label-sm text-label-sm uppercase tracking-wider">
+<span>Sistemas de Gestão</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Atletas &amp; Elenco</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-secondary font-semibold">Cadastro &amp; Gestão Unificada</span>
+</div>
+<div class="flex items-center flex-wrap gap-space-sm pt-0.5">
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Cadastro &amp; Gestão de Atletas e Clubes</h1>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span>SINCRONIZAÇÃO CBF / TMS ATIVA</span>
+</div>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-space-sm">
+<button class="flex items-center gap-space-xs px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all font-body-md text-body-md shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">file_upload</span>
+<span>Importar Planilha (XLS/CSV)</span>
+</button>
+<button class="flex items-center gap-space-xs px-4 py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary-container font-headline-sm text-headline-sm font-bold shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:shadow-[0_0_28px_rgba(78,222,163,0.5)] transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>Salvar Novo Registro</span>
+</button>
+</div>
+</div>
+<!-- Segmented Tab Navigation -->
+<div class="flex items-center justify-between flex-wrap gap-space-md p-1.5 rounded-xl bg-surface-container-lowest shadow-sm mb-space-lg">
+<div class="flex items-center gap-1.5" role="tablist">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high text-primary font-headline-sm text-headline-sm font-semibold transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">sports_soccer</span>
+<span>Atletas Cadastrados</span>
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm">148</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-body-md text-body-md transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">shield</span>
+<span>Clubes &amp; Escolinhas Parceiras</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-outline font-label-sm text-label-sm">24</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-body-md text-body-md transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">sync_saved_locally</span>
+<span>Importação em Lote &amp; Documentos</span>
+</button>
+</div>
+<!-- Quick Stats Telemetry Ribbon -->
+<div class="flex items-center gap-space-md px-3 py-1 text-on-surface-variant font-label-sm text-label-sm hidden xl:flex">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">memory</span>
+<span>Motor IA KinePitch v4.8</span>
+</div>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[16px]">sensors</span>
+<span>Sensores IMU 240Hz Prontos</span>
+</div>
+</div>
+</div>
+<!-- Main 12-Column Grid Workspace -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN (4 Cols): Biometric Live Preview & Rapid Diagnostics -->
+<div class="xl:col-span-4 flex flex-col gap-space-md">
+<!-- Athlete Profile Card -->
+<div class="rounded-xl bg-surface-container-low shadow-md overflow-hidden relative">
+<div class="h-24 w-full bg-gradient-to-r from-surface-container to-surface-container-high relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(#4cd7f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<div class="absolute top-3 right-3 flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur text-secondary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>ID: 5P-88204-BR</span>
+</div>
+</div>
+<div class="px-space-md pb-space-md pt-0 relative flex flex-col">
+<!-- Avatar Section -->
+<div class="flex items-end justify-between -mt-12 mb-space-sm">
+<div class="relative group">
+<div class="w-24 h-24 rounded-xl overflow-hidden bg-surface-container-high shadow-lg">
+<img class="w-full h-full object-cover" data-alt="Close-up professional athletic portrait of an intense young Brazilian football player with sharp lighting, neon cyan and emerald ambient stadium glow, dark background, ultra-sharp focus on facial biomechanics markers and telemetry dots." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4PV1W_JBT9T4qD68ZYBpbRi7mIF8Rfp_W3jQbU-Y8JdsYKdNj3O2iHonJb77-NWEA1NQY6AyYqV6AFGsVHdQSemkkLZjLJ0rIqBG95BN40SUp79f7TwvNfKmllOgGzIMVfC3lUjrjVBXI4zNCQRaHnrp4CvIOa_5ZyaPgJ_XI6mrqRcDKf9yE2VH2FdEoWIU8RoGhk4DPla42dq0J8tiw2RlGxeUqmNdxrEOvooVG"/>
+</div>
+<button aria-label="Alterar foto biométrica" class="absolute -bottom-1 -right-1 w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-md hover:bg-primary-fixed transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span>
+</button>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2.5 py-1 rounded bg-primary/10 text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                Apto para Avaliação 3D
+              </span>
+<span class="font-label-sm text-label-sm text-outline">Sub-17 • Nasc. 2008</span>
+</div>
+</div>
+<!-- Dynamic Identity Preview -->
+<div class="flex flex-col gap-0.5 mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Matheus Henrique</span>
+<span class="text-tertiary font-label-md text-label-md">"Canhotinha"</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">shield</span>
+              5Play Academy • Meia de Criação / Ponta
+            </span>
+</div>
+<!-- Upload Hi-Res Button -->
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-secondary hover:text-on-surface font-label-md text-label-md font-medium transition-all flex items-center justify-center gap-2 mb-space-md shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">document_scanner</span>
+<span>Carregar Foto de Alta Resolução / FaceScan</span>
+</button>
+<!-- Registration Completeness Bar -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col gap-2 mb-space-sm">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-outline uppercase tracking-wider">Completude do Cadastro</span>
+<span class="text-primary font-bold">85% CONCLUÍDO</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-primary rounded-full transition-all duration-500" style="width: 85%;"></div>
+</div>
+<span class="font-body-sm text-body-sm text-tertiary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">info</span>
+              Faltam exames de bioimpedância atualizados.
+            </span>
+</div>
+<!-- Kinematic Radar HUD Insight -->
+<div class="p-space-sm rounded-lg bg-surface-container-high/60 flex flex-col gap-2 mb-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">neurology</span>
+                Orientação KinePitch AI
+              </span>
+<span class="font-label-sm text-label-sm text-outline">ISO 20600</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Para maior acurácia no motor de IA KinePitch, certifique-se de preencher a envergadura precisa e o estágio maturacional (Mirwald/PVC). Isso recalcula o torque articular previsto nas rotações de chute.
+            </p>
+</div>
+<!-- Quick Action Buttons -->
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+<button class="py-2 px-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm font-medium transition-all flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px] text-tertiary">picture_as_pdf</span>
+<span class="truncate">Ficha Médica PDF</span>
+</button>
+<button class="py-2 px-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm font-medium transition-all flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">nfc</span>
+<span class="truncate">Vincular Tag GPS</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Club Network Snapshot Card -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">hub</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Clubes &amp; Parceiros Ativos</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">24 Totais</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold font-headline-sm text-headline-sm">5P</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">5Play Pro Academy</span>
+<span class="font-label-sm text-label-sm text-outline">Matriz São Paulo • 42 Atletas</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm font-semibold">Principal</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary font-bold font-headline-sm text-headline-sm">SFC</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Santos FC (Base &amp; Captação)</span>
+<span class="font-label-sm text-label-sm text-outline">Convênio Scouting • 18 Atletas</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">verified</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-tertiary font-bold font-headline-sm text-headline-sm">SEP</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Palmeiras Sub-17</span>
+<span class="font-label-sm text-label-sm text-outline">Compartilhamento de Carga</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">link</span>
+</div>
+</div>
+<button class="w-full py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-outline hover:text-on-surface font-label-sm text-label-sm font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 mt-1" type="button">
+<span>Abrir Diretório de Clubes Parceiros</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- RIGHT MAIN FORM (8 Cols): Structured Telemetry Sections -->
+<div class="xl:col-span-8 flex flex-col gap-space-lg">
+<!-- SEÇÃO 1: Dados Pessoais & Vínculo Institucional -->
+<section class="rounded-xl bg-surface-container-low shadow-md p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b border-surface-container-high">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold font-headline-sm text-headline-sm">01</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Dados Pessoais &amp; Vínculo Institucional</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Identificação federativa, registros CBF/FIFA TMS e filiação esportiva</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-outline">TMS CONNECTED</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- Campo 1 -->
+<div class="flex flex-col gap-1.5 lg:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1">
+              Nome Completo do Atleta <span class="text-error">*</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">badge</span>
+<input class="w-full bg-surface-container-lowest pl-10 pr-3 py-2.5 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all shadow-inner" type="text" value="Matheus Henrique de Alcantara Silva"/>
+</div>
+</div>
+<!-- Campo 2 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1">
+              Apelido Esportivo / Nome de Guerra
+            </label>
+<input class="w-full bg-surface-container-lowest px-3 py-2.5 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all shadow-inner" placeholder="Ex: Robinho Jr, Ferreirinha" type="text" value="Canhotinha"/>
+</div>
+<!-- Campo 3 -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Nascimento *</label>
+<span class="text-secondary font-label-sm text-label-sm font-semibold">16.4 ANOS DEC.</span>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">calendar_today</span>
+<input class="w-full bg-surface-container-lowest pl-10 pr-3 py-2 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all shadow-inner" type="date" value="2008-05-14"/>
+</div>
+</div>
+<!-- Campo 4 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">CPF / Passaporte</label>
+<input class="w-full bg-surface-container-lowest px-3 py-2.5 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all shadow-inner" type="text" value="442.891.028-19"/>
+</div>
+<!-- Campo 5 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Clube Atual *</label>
+<select class="w-full bg-surface-container-lowest px-3 py-2.5 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all cursor-pointer shadow-inner">
+<option selected="" value="5play">5Play Pro Academy</option>
+<option value="santos">Santos FC</option>
+<option value="palmeiras">SE Palmeiras</option>
+<option value="flamengo">CR Flamengo</option>
+<option value="corinthians">SC Corinthians Paulista</option>
+<option value="livre">Sem Vínculo / Agente Livre</option>
+</select>
+</div>
+<!-- Campo 6 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Categoria Competitiva *</label>
+<select class="w-full bg-surface-container-lowest px-3 py-2.5 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all cursor-pointer shadow-inner">
+<option value="sub9">Sub-9 (Iniciação)</option>
+<option value="sub11">Sub-11 (Base I)</option>
+<option value="sub13">Sub-13 (Base II)</option>
+<option value="sub15">Sub-15 (Infantil)</option>
+<option selected="" value="sub17">Sub-17 (Juvenil)</option>
+<option value="sub20">Sub-20 (Juniores)</option>
+<option value="prof">Profissional / Aspirante</option>
+</select>
+</div>
+<!-- Campo 7 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Tipo de Contrato</label>
+<select class="w-full bg-surface-container-lowest px-3 py-2.5 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all cursor-pointer shadow-inner">
+<option selected="" value="formacao">Formação Desportiva Inicial (FDI)</option>
+<option value="profissional">Profissional Registrado (CBF)</option>
+<option value="amador">Amador Federado</option>
+<option value="avaliacao">Período de Avaliação / Trial 30d</option>
+</select>
+</div>
+<!-- Campo 8 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Empresário / Agência Licenciada</label>
+<input class="w-full bg-surface-container-lowest px-3 py-2.5 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all shadow-inner" type="text" value="Talent Sports Management (F. Bertolucci)"/>
+</div>
+<!-- Campo 9 -->
+<div class="flex flex-col gap-1.5 lg:col-span-3">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Responsável Legal &amp; Contato de Emergência</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
+<input class="w-full bg-surface-container-lowest px-3 py-2.5 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all shadow-inner" placeholder="Nome do Responsável" type="text" value="Carlos Eduardo Silva (Pai)"/>
+<input class="w-full bg-surface-container-lowest px-3 py-2.5 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all shadow-inner" placeholder="WhatsApp / Telefone com DDD" type="tel" value="+55 (11) 98452-9912"/>
+</div>
+</div>
+</div>
+</section>
+<!-- SEÇÃO 2: Perfil Tático & Posicionamento -->
+<section class="rounded-xl bg-surface-container-low shadow-md p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b border-surface-container-high">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center font-bold font-headline-sm text-headline-sm">02</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Perfil Tático &amp; Posicionamento KinePitch</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Diretrizes motoras para alinhamento dos algoritmos de IA de campo</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-secondary font-semibold">COORDENADAS 3D</span>
+</div>
+<!-- Posição Primária - Tactical Selector Grid -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Posição Primária de Campo *</label>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2">
+<button class="flex flex-col items-center justify-center p-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined text-[20px] mb-1">front_hand</span>
+<span class="font-label-md text-label-md">Goleiro</span>
+<span class="font-label-sm text-label-sm text-outline">GK</span>
+</button>
+<button class="flex flex-col items-center justify-center p-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined text-[20px] mb-1">shield</span>
+<span class="font-label-md text-label-md">Zagueiro</span>
+<span class="font-label-sm text-label-sm text-outline">CB</span>
+</button>
+<button class="flex flex-col items-center justify-center p-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined text-[20px] mb-1">swap_driving_apps</span>
+<span class="font-label-md text-label-md">Lateral D/E</span>
+<span class="font-label-sm text-label-sm text-outline">FB / WB</span>
+</button>
+<button class="flex flex-col items-center justify-center p-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined text-[20px] mb-1">anchor</span>
+<span class="font-label-md text-label-md">Volante</span>
+<span class="font-label-sm text-label-sm text-outline">DM / 5</span>
+</button>
+<button class="flex flex-col items-center justify-center p-2.5 rounded-lg bg-secondary/15 text-secondary shadow-[0_0_12px_rgba(76,215,246,0.2)] transition-all" type="button">
+<span class="material-symbols-outlined text-[20px] mb-1">hub</span>
+<span class="font-label-md text-label-md font-bold">Meia Criação</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">CAM / 10</span>
+</button>
+<button class="flex flex-col items-center justify-center p-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined text-[20px] mb-1">fast_forward</span>
+<span class="font-label-md text-label-md">Ponta / Extr.</span>
+<span class="font-label-sm text-label-sm text-outline">WNG / 7-11</span>
+</button>
+<button class="flex flex-col items-center justify-center p-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined text-[20px] mb-1">crisis_alert</span>
+<span class="font-label-md text-label-md">Centroavante</span>
+<span class="font-label-sm text-label-sm text-outline">CF / 9</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-2">
+<!-- Posição Secundária -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Posição Alternativa / Secundária</label>
+<select class="w-full bg-surface-container-lowest px-3 py-2.5 rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-secondary transition-all cursor-pointer shadow-inner">
+<option selected="" value="ponta_invertida">Ponta-Direita (Pé Invertido / Facilidade de Corte)</option>
+<option value="segundo_atacante">Segundo Atacante (Shadow Striker)</option>
+<option value="segundo_volante">Segundo Volante (Box-to-Box)</option>
+<option value="ala">Ala Ofensivo Esquerdo</option>
+</select>
+</div>
+<!-- Pé Dominante Selector -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pé Dominante *</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="py-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md font-semibold transition-all" type="button">
+                Destro
+              </button>
+<button class="py-2.5 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-bold shadow-[0_0_12px_rgba(16,185,129,0.35)] transition-all" type="button">
+                Canhoto
+              </button>
+<button class="py-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md font-semibold transition-all" type="button">
+                Ambidestro
+              </button>
+</div>
+</div>
+<!-- Tags de Valências / Características de Jogo -->
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Valências Táticas &amp; Características Primárias</label>
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold">
+<span>1v1 Ofensivo &amp; Drible Curto</span>
+<button class="material-symbols-outlined text-[14px] hover:text-error" type="button">close</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold">
+<span>Visão Espacial &amp; Passe de Ruptura</span>
+<button class="material-symbols-outlined text-[14px] hover:text-error" type="button">close</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm font-semibold">
+<span>Finalização de Média Distância</span>
+<button class="material-symbols-outlined text-[14px] hover:text-error" type="button">close</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm font-semibold">
+<span>Aceleração 0-10m</span>
+<button class="material-symbols-outlined text-[14px] hover:text-error" type="button">close</button>
+</span>
+<button class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-container text-outline hover:text-on-surface font-label-sm text-label-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[14px]">add</span>
+<span>Adicionar Valência</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SEÇÃO 3: Antropometria, Maturação & Saúde -->
+<section class="rounded-xl bg-surface-container-low shadow-md p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b border-surface-container-high">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center font-bold font-headline-sm text-headline-sm">03</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Antropometria, Maturação Biológica &amp; Saúde</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Parâmetros cinemáticos para cálculo de momentos de força e prevenção de sobrecarga articular</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-tertiary font-semibold">TELEMETRIA MÉDICA</span>
+</div>
+<!-- 4 Metric Inputs in High Density Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md">
+<div class="flex flex-col gap-1 p-3 rounded-lg bg-surface-container-lowest">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Estatura Total</span>
+<div class="flex items-baseline gap-1">
+<input class="w-20 bg-transparent text-headline-md font-headline-md text-on-surface font-bold focus:outline-none focus:text-primary" step="0.5" type="number" value="181"/>
+<span class="font-label-md text-label-md text-secondary">cm</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">+1.4cm em 90 dias</span>
+</div>
+<div class="flex flex-col gap-1 p-3 rounded-lg bg-surface-container-lowest">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Massa Corporal</span>
+<div class="flex items-baseline gap-1">
+<input class="w-20 bg-transparent text-headline-md font-headline-md text-on-surface font-bold focus:outline-none focus:text-primary" step="0.1" type="number" value="72.4"/>
+<span class="font-label-md text-label-md text-secondary">kg</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">IMC Estimado: 22.1</span>
+</div>
+<div class="flex flex-col gap-1 p-3 rounded-lg bg-surface-container-lowest">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Envergadura</span>
+<div class="flex items-baseline gap-1">
+<input class="w-20 bg-transparent text-headline-md font-headline-md text-on-surface font-bold focus:outline-none focus:text-secondary" step="0.5" type="number" value="186"/>
+<span class="font-label-md text-label-md text-secondary">cm</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Índice Enverg.: +5cm</span>
+</div>
+<div class="flex flex-col gap-1 p-3 rounded-lg bg-surface-container-lowest">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">% Gordura (Bioimp.)</span>
+<div class="flex items-baseline gap-1">
+<input class="w-20 bg-transparent text-headline-md font-headline-md text-on-surface font-bold focus:outline-none focus:text-primary" step="0.1" type="number" value="9.8"/>
+<span class="font-label-md text-label-md text-secondary">%</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Faixa Atlética Pro</span>
+</div>
+</div>
+<!-- Maturation Stage (PVC) Selector -->
+<div class="flex flex-col gap-2 pt-2">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Estágio Maturacional (Pico de Velocidade de Crescimento - Mirwald / PVC)</label>
+<span class="font-label-sm text-label-sm text-secondary cursor-pointer hover:underline">Abrir Curva de Crescimento Z-Score</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest cursor-pointer hover:bg-surface-container transition-all">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Pré-PVC</span>
+<span class="font-label-sm text-label-sm text-outline">Crescimento Acelerado Futuro (&gt;1 ano)</span>
+</div>
+<input class="accent-primary" name="pvc_stage" type="radio" value="pre"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-lg bg-secondary/10 shadow-[0_0_12px_rgba(76,215,246,0.15)] cursor-pointer">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-secondary font-bold">PVC em Andamento</span>
+<span class="font-label-sm text-label-sm text-secondary/80">Janela Crítica de Coordenação e Força</span>
+</div>
+<input checked="" class="accent-secondary" name="pvc_stage" type="radio" value="pvc"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest cursor-pointer hover:bg-surface-container transition-all">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Pós-PVC</span>
+<span class="font-label-sm text-label-sm text-outline">Consolidado / Adulto Biomédico</span>
+</div>
+<input class="accent-primary" name="pvc_stage" type="radio" value="pos"/>
+</label>
+</div>
+</div>
+<!-- Histórico de Lesões & Atenção Articular -->
+<div class="flex flex-col gap-2 pt-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Histórico Clínico Recente &amp; Monitoramento Articular</label>
+<div class="flex flex-wrap items-center gap-2">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-lowest">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Tendinopatia Patelar D - Grau 1</span>
+<span class="px-1.5 py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm font-bold">RESOLVIDO</span>
+<button class="material-symbols-outlined text-[16px] text-outline hover:text-error" type="button">close</button>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-lowest">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Entorse Tornozelo E (Inversão)</span>
+<span class="px-1.5 py-0.5 rounded bg-tertiary/10 text-tertiary font-label-sm text-label-sm font-bold">EM OBSERVAÇÃO</span>
+<button class="material-symbols-outlined text-[16px] text-outline hover:text-error" type="button">close</button>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-secondary font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+<span>+ Adicionar Ocorrência Médica</span>
+</button>
+</div>
+</div>
+<!-- AI Biomechanical Guardrail Switcher -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex items-center justify-between gap-space-md mt-1">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">monitor_heart</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Alerta KinePitch AI de Assimetria Pélvica</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Emitir notificação óptica durante o processamento cinemático do chute caso a rotação de quadril exceda 12° de assimetria.</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</section>
+<!-- Bottom Form Actions Ribbon -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md p-space-md rounded-xl bg-surface-container-low shadow-md">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-outline hover:text-on-surface font-body-md text-body-md transition-all w-full sm:w-auto justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Cancelar / Voltar à Lista</span>
+</button>
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-md text-body-md font-semibold transition-all" type="button">
+            Salvar como Rascunho
+          </button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-surface-lowest font-headline-sm text-headline-sm font-bold shadow-[0_0_24px_rgba(78,222,163,0.4)] hover:shadow-[0_0_32px_rgba(78,222,163,0.6)] hover:bg-primary-fixed transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">videocam</span>
+<span>Salvar &amp; Iniciar Análise 3D</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

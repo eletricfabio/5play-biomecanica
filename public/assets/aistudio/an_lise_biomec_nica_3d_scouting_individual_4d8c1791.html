@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"inverse-surface":"#dfe2ee","secondary-fixed-dim":"#4cd7f6","tertiary-fixed":"#ffddb8","surface-container":"#1c2028","on-secondary-container":"#00424e","on-primary-fixed":"#002113","surface-dim":"#0f131c","primary-container":"#10b981","primary":"#4edea3","surface-container-high":"#262a33","on-error-container":"#ffdad6","on-primary":"#003824","secondary":"#4cd7f6","outline":"#86948a","on-primary-fixed-variant":"#005236","tertiary":"#ffb95f","on-tertiary-fixed-variant":"#653e00","inverse-primary":"#006c49","surface-variant":"#31353e","error-container":"#93000a","secondary-fixed":"#acedff","on-secondary":"#003640","surface-bright":"#353942","on-primary-container":"#00422b","on-secondary-fixed-variant":"#004e5c","inverse-on-surface":"#2c3039","background":"#0f131c","on-error":"#690005","on-tertiary":"#472a00","error":"#ffb4ab","on-tertiary-fixed":"#2a1700","tertiary-fixed-dim":"#ffb95f","surface":"#0f131c","surface-tint":"#4edea3","on-surface-variant":"#bbcabf","on-tertiary-container":"#523200","primary-fixed":"#6ffbbe","surface-container-highest":"#31353e","secondary-container":"#03b5d3","surface-container-low":"#181c24","outline-variant":"#3c4a42","on-background":"#dfe2ee","on-secondary-fixed":"#001f26","surface-container-lowest":"#0a0e16","primary-fixed-dim":"#4edea3","tertiary-container":"#e29100","on-surface":"#dfe2ee"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"gutter":"1rem","space-lg":"1.5rem","space-sm":"0.5rem","margin-desktop":"2rem","margin":"1rem","space-md":"1rem","gutter-desktop":"1.5rem","space-xl":"2.5rem","space-xs":"0.25rem"},"fontFamily":{"label-lg":["JetBrains Mono"],"headline-lg":["Space Grotesk"],"body-sm":["Inter"],"body-lg":["Inter"],"headline-sm":["Space Grotesk"],"headline-lg-mobile":["Space Grotesk"],"label-sm":["JetBrains Mono"],"body-md":["Inter"],"headline-md":["Space Grotesk"],"label-md":["JetBrains Mono"],"headline-xl":["Space Grotesk"],"headline-xl-mobile":["Space Grotesk"]},"fontSize":{"label-lg":["14px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-md":["22px",{"lineHeight":"28px","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.03em","fontWeight":"700"}],"headline-xl-mobile":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-screen w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex flex-col"><div class="px-space-md py-space-md bg-surface-container-low/40 flex items-center gap-space-sm"><img alt="Logo insta perfil BR.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDwy9BpXjlF9EUiFgecIh9Y5V0T9FVlQS9AZ9WGdMj2UnxbUQgGACEnAJh-9uCVukOrDns71DZuqhCxgknSc06Axso7010amR8D_wjKzRBJ6SXZu7ML_VvKT1QgfLd5yilIIbtGSt_OJSRgyCMBQIf659GtC7uEfLlixWpQ5N8Qs26B-VJruIw9rOJKQUbHaWhm3mgDtkbxmPHNWze9FR2Edt6lqDbS1IuWAdX3rvqPnYz26GZSWiW7L-Jv"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight truncate">5PLAY SPORTS</span><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary truncate">KinePitch AI Pro</span></div></div></div><div class="px-space-md pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">Sistemas de Análise</span></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-surface-container-high text-primary font-bold rounded-lg"><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="dashboard-geral" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-body-md text-body-md">Dashboard Geral</span></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant group-hover:text-on-surface">LIVE</span></a><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="atletas-e-elenco" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">groups</span><span class="font-body-md text-body-md">Atletas &amp; Elenco</span></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">34</span></a><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="clubes-e-parceiros" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">shield</span><span class="font-body-md text-body-md">Clubes &amp; Parceiros</span></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">8</span></a><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="analise-biomecanica-3d" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] text-secondary">accessibility_new</span><span class="font-body-md text-body-md">Análise Biomecânica 3D</span></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-secondary/10 text-secondary font-semibold">LIVE</span></a><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="relatorios-de-scouting" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="font-body-md text-body-md">Relatórios de Scouting</span></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">12</span></a><a class="group flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="configuracoes" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">tune</span><span class="font-body-md text-body-md">Configurações</span></div></a></nav></div><div class="flex flex-col gap-space-sm p-space-md bg-surface-container-lowest"><div class="rounded-lg bg-surface-container-low p-space-sm flex flex-col gap-1"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Status de Sensores</span><span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span></div><span class="font-label-sm text-label-sm text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">speed</span>GPU Tracking Online • 60 FPS</span></div><div class="flex items-center justify-between pt-space-xs"><div class="flex items-center gap-space-sm min-w-0"><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 text-on-surface"><span class="material-symbols-outlined text-[18px]">biotech</span></div><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-surface font-semibold truncate">Dr. Fisiologista Chefe</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Head Scout &amp; Performance</span></div></div><span class="material-symbols-outlined text-outline text-[18px]">verified</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.15)] z-40 flex items-center justify-between px-space-lg gap-space-md"><div class="flex items-center gap-space-md flex-1 max-w-2xl"><img alt="Logo insta perfil BR.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDwy9BpXjlF9EUiFgecIh9Y5V0T9FVlQS9AZ9WGdMj2UnxbUQgGACEnAJh-9uCVukOrDns71DZuqhCxgknSc06Axso7010amR8D_wjKzRBJ6SXZu7ML_VvKT1QgfLd5yilIIbtGSt_OJSRgyCMBQIf659GtC7uEfLlixWpQ5N8Qs26B-VJruIw9rOJKQUbHaWhm3mgDtkbxmPHNWze9FR2Edt6lqDbS1IuWAdX3rvqPnYz26GZSWiW7L-Jv"/><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg"><span class="material-symbols-outlined text-outline text-[18px]">category</span><select aria-label="Seletor de Categoria" class="bg-transparent font-label-md text-label-md text-on-surface focus:outline-none cursor-pointer pr-space-xs"><option class="bg-surface-container" value="sub20">Sub-20</option><option class="bg-surface-container" value="prof">Profissional</option><option class="bg-surface-container" value="sub17">Sub-17</option><option class="bg-surface-container" value="sub15">Sub-15</option><option class="bg-surface-container" value="sub13">Sub-13</option><option class="bg-surface-container" value="sub11">Sub-11</option></select></div><div class="flex-1 relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">search</span><input class="w-full bg-surface-container-low pl-9 pr-14 py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container transition-all" placeholder="Buscar atleta por nome, ID ou posição..." type="text"/><kbd class="absolute right-2 font-label-sm text-label-sm text-outline bg-surface-container-high px-1.5 py-0.5 rounded">⌘K</kbd></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-md text-on-surface-variant"><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Sync Telemetria:</span><span class="font-label-md text-label-md text-on-surface font-semibold">99.8%</span></div><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-tertiary text-[18px]">warning</span><span class="font-label-sm text-label-sm text-tertiary">2 Alertas Carga</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Notificações e Alertas" class="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-all relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-tertiary"></span></button><button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-headline-sm font-semibold shadow-[0_0_16px_rgba(16,185,129,0.35)] hover:shadow-[0_0_24px_rgba(16,185,129,0.55)] transition-all cursor-pointer"><span class="material-symbols-outlined text-[18px]">video_call</span><span>+ Nova Análise de Vídeo</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 w-full px-gutter-desktop min-h-screen bg-background"><div class="flex flex-col w-full pb-space-xl text-on-surface">
+<!-- TOP BAR / BREADCRUMB & CONTEXT META -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm py-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span class="hover:text-on-surface cursor-pointer">Sistemas de Análise</span>
+<span>/</span>
+<span class="hover:text-on-surface cursor-pointer">Atletas &amp; Elenco</span>
+<span>/</span>
+<span class="text-secondary font-semibold">Análise Biomecânica Individual 3D</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5 px-space-sm py-1 bg-surface-container-high rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Sessão Calibrada #BK-8829</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Captura: Hoje, 10:42 BRT</span>
+</div>
+</div>
+<!-- AREA 1: ATLETA PROFILE HEADER HUD -->
+<section class="relative bg-surface-container-low rounded-xl p-space-md shadow-xl mb-space-md overflow-hidden">
+<div class="absolute -right-24 -top-24 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute left-1/3 -bottom-16 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Info Cadastral & Avatar -->
+<div class="flex flex-col sm:flex-row sm:items-center gap-space-md">
+<!-- Avatar com Moldura Cyber & Status -->
+<div class="relative flex-shrink-0">
+<div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-surface-container-high shadow-lg">
+<img alt="Lucas Silveira - Perfil de Atleta 5PLAY SPORTS" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb4WyLbVTNZ_SGiCFekE2svu4WN40hekDPsXNe3ffpN2WMbMJcOwQNTlMXLtqImpmVfixQSRyJgocgXKpu6wpFScbRPyGj6RfXiUZggiHETDj7MjwD2NCxwZWtUNbcsNF_FD6EYIheiWLr-AfaZdrRwXa2ghkPgEtrq5jhI9oOGT-kmftBpngxjSi8MvmtrDzjQVmJcqTYfvF5UcjIIhF_xPMJV33b_9BPxUZdgm1g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent"></div>
+</div>
+<span class="absolute -bottom-1.5 -right-1.5 flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-lowest shadow-md">
+<span class="w-3 h-3 rounded-full bg-primary animate-ping absolute opacity-75"></span>
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+</span>
+</div>
+<!-- Dados do Atleta -->
+<div class="flex flex-col gap-1.5 min-w-0">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight truncate">Lucas Silveira</h1>
+<span class="px-2 py-0.5 rounded bg-surface-container-high font-label-sm text-label-sm text-secondary uppercase font-semibold">ID #5P-0492</span>
+<!-- Selo de Verificação Studio Verde Neon -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-primary-container/15 text-primary">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Análise Certificada Studio (Precisão Alta • 4K 60FPS / 22 Pontos Ópticos)</span>
+</div>
+</div>
+<!-- Badges e Metadados Esportivos -->
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-2.5 py-1 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+<strong class="text-on-surface font-semibold">Sub-17</strong> • 16.8 anos
+            </span>
+<span class="px-2.5 py-1 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">sports_soccer</span>
+              Ponta Direita <span class="text-secondary">(Extremo Invertido)</span>
+</span>
+<span class="px-2.5 py-1 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">shield</span>
+              5Play Academy / City FC
+            </span>
+<span class="px-2.5 py-1 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+              Pé Dominante: <span class="text-primary font-semibold">Canhoto (Esquerdo)</span>
+</span>
+<span class="px-2.5 py-1 rounded bg-surface-container-high font-label-sm text-label-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">timeline</span>
+              Maturacional: Pós-PHV (+1.4a Mirwald)
+            </span>
+</div>
+</div>
+</div>
+<!-- Ações de Exportação e Compartilhamento -->
+<div class="flex flex-wrap sm:flex-nowrap items-center gap-space-sm flex-shrink-0">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-secondary font-label-md text-label-md transition-all cursor-pointer" id="btnShareModal">
+<span class="material-symbols-outlined text-[18px]">lock_open</span>
+<span>Compartilhar Link Seguro</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-primary-container hover:bg-primary-container/90 text-on-primary-container font-headline-sm text-headline-sm font-semibold shadow-lg hover:shadow-primary/30 transition-all cursor-pointer" id="btnExportPdf">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+<span>Exportar PDF Executivo</span>
+</button>
+</div>
+</div>
+</section>
+<!-- GRID CENTRAL: COLUNA ESQUERDA (PLAYER 3D & TIMELINE) | COLUNA DIREITA (KPIS, AI BRAIN & RADAR) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md">
+<!-- ============================================== -->
+<!-- COLUNA ESQUERDA: PLAYER DE VÍDEO IA & HUD (7 COLS) -->
+<!-- ============================================== -->
+<div class="xl:col-span-7 flex flex-col gap-space-md">
+<!-- Container do Viewport do Player IA -->
+<div class="relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-2xl flex flex-col">
+<!-- Header de Telemetria do Feed -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs px-space-md py-space-sm bg-surface-container-low/90 z-20">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+              TRACKING ÓPTICO 22 MARCADORES • OPENCAP 3D
+            </span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+              CÂMERA ESTÉREO 1 (SAGITAL - 60 FPS)
+            </span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary font-label-sm text-label-sm font-bold">4K ULTRA-SYNC</span>
+<button class="text-outline hover:text-on-surface transition-colors p-1 flex items-center" title="Tela Cheia">
+<span class="material-symbols-outlined text-[18px]">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- Stage do Vídeo com Overlay Biomecânico Cinemático -->
+<div class="relative w-full aspect-[16/9] bg-surface-container-lowest flex items-center justify-center overflow-hidden">
+<!-- Background de Inspiração Visual / Cena Biomecânica -->
+<div class="bg-cover bg-center w-full h-full absolute inset-0 filter brightness-[0.75] contrast-[1.1]" data-alt="Dark dramatic football stadium night scene with soccer striker Lucas Silveira mid-air kick strike, neon cyan and emerald biometric skeletal motion tracking vectors overlay, illuminated field floodlights and cinematic stadium atmosphere" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBg0wsRrpYVww0ynHJDkG2dNa8aPTqq-pJjEd9pwbaoSHGbVw0Rr8k9vMeq6FcQ8fd4w3bttzY5djXytbtT5aQW4FO5fA_VBnGKsWNo12dxjmAldD8E2U6ZH7JoURh3BHLLZ49j7SX81Z2P9wTTn9JL4uFVqMsH5i7_wK4cmj3Mx1TMeiLqi4AnBD1SKpDqqpTANFsOG8AvdoGJYxlIRoTAHc0u1YfyclJN0BadkhGP')"></div>
+<!-- Camada de Gradiente Scrim para Realce dos Dados e HUD -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/30 to-surface-container-lowest/40 pointer-events-none"></div>
+<!-- Overlay Vetorial SVG do Esqueleto Biomecânico 22 Pontos & Vetores -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-10" fill="none" viewbox="0 0 1000 562.5" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="cyanGlow" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#10b981" stop-opacity="0.8"></stop>
+</lineargradient>
+<filter height="140%" id="glowFilter" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="4"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+</filter>
+</defs>
+<!-- Linhas de Ligação Articular (Bones) -->
+<!-- Cabeça para Pescoço e Espinha -->
+<line stroke="#4cd7f6" stroke-dasharray="4 2" stroke-width="2.5" x1="490" x2="480" y1="150" y2="190"></line>
+<line stroke="#4cd7f6" stroke-width="3" x1="480" x2="455" y1="190" y2="280"></line>
+<!-- Braço Esquerdo (Contrapeso Aéreo) -->
+<line stroke="#4cd7f6" stroke-width="2.5" x1="480" x2="560" y1="190" y2="215"></line>
+<line stroke="#4cd7f6" stroke-width="2" x1="560" x2="605" y1="215" y2="190"></line>
+<!-- Braço Direito (Elevação) -->
+<line stroke="#4cd7f6" stroke-width="2.5" x1="480" x2="365" y1="190" y2="180"></line>
+<line stroke="#4cd7f6" stroke-width="2" x1="365" x2="310" y1="180" y2="135"></line>
+<!-- Pelve / Cintura Pélvica -->
+<line stroke="#10b981" stroke-width="3.5" x1="455" x2="435" y1="280" y2="330"></line>
+<line stroke="#4cd7f6" stroke-width="3" x1="455" x2="485" y1="280" y2="335"></line>
+<line stroke="#4cd7f6" stroke-width="2.5" x1="435" x2="485" y1="330" y2="335"></line>
+<!-- Perna de Apoio Direita (Plant Foot) -->
+<line stroke="#10b981" stroke-width="3" x1="435" x2="520" y1="330" y2="415"></line>
+<line stroke="#10b981" stroke-width="3" x1="520" x2="585" y1="415" y2="505"></line>
+<!-- Perna de Chute Esquerda (Kicking Chain - Em Ação) -->
+<line filter="url(#glowFilter)" stroke="#4cd7f6" stroke-width="4" x1="485" x2="565" y1="335" y2="370"></line>
+<line filter="url(#glowFilter)" stroke="#4cd7f6" stroke-width="4" x1="565" x2="685" y1="370" y2="378"></line>
+<!-- Vetor de Reação do Solo (GRF) no Pé de Apoio -->
+<line stroke="#10b981" stroke-dasharray="3 3" stroke-width="2.5" x1="585" x2="550" y1="505" y2="380"></line>
+<polygon fill="#10b981" points="547,380 553,392 541,390"></polygon>
+<circle cx="585" cy="505" r="28" stroke="#10b981" stroke-opacity="0.4" stroke-width="1.5"></circle>
+<circle cx="585" cy="505" r="46" stroke="#10b981" stroke-dasharray="2 4" stroke-opacity="0.3" stroke-width="1"></circle>
+<!-- Vetor de Velocidade da Bola / Arco Cinético -->
+<path d="M 685 378 Q 740 340 850 250" stroke="url(#cyanGlow)" stroke-dasharray="5 3" stroke-width="3"></path>
+<polygon fill="#4cd7f6" points="850,250 834,258 842,268"></polygon>
+<!-- Arcos Angulares de Precisão -->
+<!-- Flexão de Joelho -->
+<path d="M 535 355 A 35 35 0 0 1 585 390" fill="none" stroke="#ffb95f" stroke-width="2.5"></path>
+<!-- Rotação Pélvica -->
+<path d="M 440 310 A 30 30 0 0 1 475 315" fill="none" stroke="#4cd7f6" stroke-width="2"></path>
+<!-- Marcadores Articulares (22 Pontos Ópticos Nodes) -->
+<!-- Cabeça & Pescoço -->
+<circle cx="490" cy="150" fill="#4cd7f6" filter="url(#glowFilter)" r="5"></circle>
+<circle cx="480" cy="190" fill="#4cd7f6" r="4.5"></circle>
+<!-- Membros Superiores -->
+<circle cx="365" cy="180" fill="#4cd7f6" r="4.5"></circle>
+<circle cx="310" cy="135" fill="#4cd7f6" r="4"></circle>
+<circle cx="560" cy="215" fill="#4cd7f6" r="4.5"></circle>
+<circle cx="605" cy="190" fill="#4cd7f6" r="4"></circle>
+<!-- Coluna e Pelve -->
+<circle cx="468" cy="235" fill="#4cd7f6" r="4"></circle>
+<circle cx="455" cy="280" fill="#4cd7f6" r="5"></circle>
+<circle cx="435" cy="330" fill="#10b981" r="5.5"></circle>
+<circle cx="485" cy="335" fill="#4cd7f6" r="5.5"></circle>
+<!-- Membro Inferior Direito -->
+<circle cx="520" cy="415" fill="#10b981" filter="url(#glowFilter)" r="6"></circle>
+<circle cx="585" cy="505" fill="#10b981" filter="url(#glowFilter)" r="6.5"></circle>
+<circle cx="615" cy="510" fill="#10b981" r="3.5"></circle>
+<!-- Membro Inferior Esquerdo (Chute) -->
+<circle cx="565" cy="370" fill="#4cd7f6" filter="url(#glowFilter)" r="7"></circle>
+<circle cx="685" cy="378" fill="#4cd7f6" filter="url(#glowFilter)" r="7.5"></circle>
+<circle cx="725" cy="365" fill="#ffb95f" filter="url(#glowFilter)" r="8" stroke="#4cd7f6" stroke-width="2"></circle>
+<circle cx="725" cy="365" r="22" stroke="#4cd7f6" stroke-dasharray="4 2" stroke-width="1.5"></circle>
+</svg>
+<!-- Badges Flutuantes de Métricas Biomecânicas em Tempo Real -->
+<!-- HUD 1: Flexão Joelho -->
+<div class="absolute top-20 left-6 bg-surface-container-low/90 backdrop-blur-md px-3 py-2 rounded-lg shadow-xl z-20 flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm uppercase text-outline">Flexão Joelho Esquerdo</span>
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm font-bold text-tertiary">42.8°</span>
+<span class="font-label-sm text-label-sm text-primary">Ótimo</span>
+</div>
+</div>
+<!-- HUD 2: Rotação Quadril -->
+<div class="absolute top-36 left-12 bg-surface-container-low/90 backdrop-blur-md px-3 py-2 rounded-lg shadow-xl z-20 flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm uppercase text-outline">Rotação de Quadril</span>
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm font-bold text-secondary">118.2°</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Backswing</span>
+</div>
+</div>
+<!-- HUD 3: Força de Reação Solo (GRF) -->
+<div class="absolute bottom-20 left-10 bg-surface-container-low/90 backdrop-blur-md px-3 py-2 rounded-lg shadow-xl z-20 flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">vertical_align_top</span>
+<span class="font-label-sm text-label-sm uppercase font-semibold">Vetor GRF (Apoio)</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">2.4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">BW (Body Weight)</span>
+</div>
+</div>
+<!-- HUD 4: Velocidade do Pé de Chute -->
+<div class="absolute bottom-28 right-8 bg-surface-container-low/90 backdrop-blur-md px-3.5 py-2.5 rounded-lg shadow-xl z-20 flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[16px]">speed</span>
+<span class="font-label-sm text-label-sm uppercase font-semibold">Velocidade Pé de Chute</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md font-bold text-secondary">98.4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">km/h</span>
+</div>
+</div>
+<!-- Watermark Indicador de Ponto de Impacto (00:06.58) -->
+<div class="absolute top-4 right-4 bg-surface-container-high/80 px-2.5 py-1 rounded font-label-sm text-label-sm text-outline z-20 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            FRAME ATIVO: 395 / 600
+          </div>
+</div>
+<!-- BARRA DE CONTROLES AVANÇADOS FRAME-A-FRAME & SELETOR DE ÂNGULO -->
+<div class="p-space-md bg-surface-container-low flex flex-col gap-space-sm">
+<!-- Linha do Seletor de Câmeras e Presets -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<!-- Tabs Câmeras -->
+<div class="flex items-center gap-1 bg-surface-container-lowest p-1 rounded-lg">
+<button class="px-2.5 py-1 rounded bg-surface-container-high text-secondary font-label-sm text-label-sm font-semibold transition-all">
+                Câm 1: Sagital Principal
+              </button>
+<button class="px-2.5 py-1 rounded hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm transition-all">
+                Câm 2: Frontal 3D
+              </button>
+<button class="px-2.5 py-1 rounded hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm transition-all">
+                Câm 3: Top-Down Tático
+              </button>
+<button class="px-2.5 py-1 rounded hover:bg-surface-container text-outline font-label-sm text-label-sm transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">grid_view</span>
+                Multi-Ângulo
+              </button>
+</div>
+<!-- Taxa de Reprodução Slow-Mo -->
+<div class="flex items-center gap-1 bg-surface-container-lowest p-1 rounded-lg">
+<button class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm font-bold">0.25x (Super Slow)</button>
+<button class="px-2 py-0.5 rounded hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm">0.5x</button>
+<button class="px-2 py-0.5 rounded hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm">1.0x</button>
+</div>
+</div>
+<!-- LINHA DO TEMPO CINEMÁTICA INTERATIVA COM MARCADORES BIOMECÂNICOS -->
+<div class="flex flex-col gap-1.5 pt-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<span class="font-bold text-secondary font-label-md text-label-md">00:06.58</span>
+<span class="text-outline">/ 00:10.00</span>
+</div>
+<span class="text-outline uppercase tracking-wider">4 Eventos Críticos Anotados</span>
+</div>
+<!-- Scrubber Track & Markers -->
+<div class="relative w-full h-8 bg-surface-container-lowest rounded-lg overflow-hidden cursor-pointer group flex items-center px-1">
+<!-- Buffer progress -->
+<div class="absolute left-0 top-0 bottom-0 bg-surface-container-high w-3/4 rounded-lg"></div>
+<!-- Active progress bar -->
+<div class="absolute left-0 top-0 bottom-0 bg-secondary/30 w-[65.8%]"></div>
+<!-- Marcador 1: [00:03.20] Início da Aceleração (Azul Ciano) -->
+<div class="absolute left-[32.0%] top-0 bottom-0 w-1 bg-secondary flex items-center justify-center z-10 group/m1" title="[00:03.20] Início Sprint">
+<span class="w-3 h-3 bg-secondary rounded-sm rotate-45 shadow-[0_0_8px_rgba(76,215,246,0.9)]"></span>
+<span class="hidden group-hover/m1:flex absolute -top-7 px-1.5 py-0.5 rounded bg-surface-container-high text-secondary font-label-sm text-label-sm whitespace-nowrap">03.20s Sprint</span>
+</div>
+<!-- Marcador 2: [00:06.58] Ponto de Apoio & Backswing (Verde Neon) ATIVO -->
+<div class="absolute left-[65.8%] top-0 bottom-0 w-1.5 bg-primary flex items-center justify-center z-20 group/m2" title="[00:06.58] Ponto de Apoio &amp; Backswing">
+<span class="w-4 h-4 bg-primary rounded-sm rotate-45 shadow-[0_0_12px_rgba(16,185,129,1)]"></span>
+<span class="absolute -top-7 px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold whitespace-nowrap shadow-md">06.58s Apoio &amp; Backswing</span>
+</div>
+<!-- Marcador 3: [00:07.12] Impacto Cinético (Laranja/Amarelo) -->
+<div class="absolute left-[71.2%] top-0 bottom-0 w-1 bg-tertiary flex items-center justify-center z-10 group/m3" title="[00:07.12] Impacto">
+<span class="w-3 h-3 bg-tertiary rounded-sm rotate-45 shadow-[0_0_8px_rgba(255,185,95,0.9)]"></span>
+<span class="hidden group-hover/m3:flex absolute -top-7 px-1.5 py-0.5 rounded bg-surface-container-high text-tertiary font-label-sm text-label-sm whitespace-nowrap">07.12s Impacto Bola</span>
+</div>
+<!-- Marcador 4: [00:08.45] Desaceleração & COD (Roxo/Ciano) -->
+<div class="absolute left-[84.5%] top-0 bottom-0 w-1 bg-secondary-fixed flex items-center justify-center z-10 group/m4" title="[00:08.45] Desaceleração / COD">
+<span class="w-3 h-3 bg-secondary-fixed rounded-sm rotate-45"></span>
+<span class="hidden group-hover/m4:flex absolute -top-7 px-1.5 py-0.5 rounded bg-surface-container-high text-secondary-fixed font-label-sm text-label-sm whitespace-nowrap">08.45s COD</span>
+</div>
+</div>
+<!-- Legenda Rápida de Cores dos Marcadores Biomecânicos -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded-sm bg-secondary rotate-45"></span>
+<span class="truncate">[00:03.20] Início Sprint</span>
+</div>
+<div class="flex items-center gap-1.5 text-primary font-semibold">
+<span class="w-2.5 h-2.5 rounded-sm bg-primary rotate-45"></span>
+<span class="truncate">[00:06.58] Apoio &amp; Backswing</span>
+</div>
+<div class="flex items-center gap-1.5 text-tertiary">
+<span class="w-2.5 h-2.5 rounded-sm bg-tertiary rotate-45"></span>
+<span class="truncate">[00:07.12] Impacto Cinético</span>
+</div>
+<div class="flex items-center gap-1.5 text-secondary-fixed">
+<span class="w-2.5 h-2.5 rounded-sm bg-secondary-fixed rotate-45"></span>
+<span class="truncate">[00:08.45] Desaceleração / COD</span>
+</div>
+</div>
+</div>
+<!-- Barra de Controles de Playback Frame a Frame -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<button class="w-8 h-8 rounded bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface transition-colors cursor-pointer" title="Retroceder 1 frame">
+<span class="material-symbols-outlined text-[18px]">skip_previous</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-primary-container hover:bg-primary-container/90 text-on-primary-container flex items-center justify-center shadow-md transition-all cursor-pointer" title="Play / Pause">
+<span class="material-symbols-outlined text-[24px]">pause</span>
+</button>
+<button class="w-8 h-8 rounded bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface transition-colors cursor-pointer" title="Avançar 1 frame">
+<span class="material-symbols-outlined text-[18px]">skip_next</span>
+</button>
+<span class="font-label-sm text-label-sm text-outline pl-2">Passo: 0.016s (1f @ 60Hz)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">straighten</span>
+                Medir Ângulo Manual
+              </button>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">compare</span>
+                Split 50/50
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- PAINEL / TABELA DE MICRO-ÂNGULOS CINEMÁTICOS ARTICULARES NO IMPACTO -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">straighten</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Micro-Ângulos Cinemáticos na Fase de Impacto</h2>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-outline">Ponto de Medição: Frame #395</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-sm pt-1">
+<!-- Item 1 -->
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase truncate">Dorsiflexão Tornozelo</span>
+<div class="flex items-baseline justify-between">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">14.6°</span>
+<span class="font-label-sm text-label-sm text-primary">+2.1° Norm</span>
+</div>
+<div class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[72%]"></div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase truncate">Extensão Joelho Chute</span>
+<div class="flex items-baseline justify-between">
+<span class="font-headline-sm text-headline-sm font-bold text-secondary">158.4°</span>
+<span class="font-label-sm text-label-sm text-secondary">Ideal 155-162°</span>
+</div>
+<div class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[88%]"></div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase truncate">Inclinação Pélvica Lateral</span>
+<div class="flex items-baseline justify-between">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">8.2°</span>
+<span class="font-label-sm text-label-sm text-primary">Estável</span>
+</div>
+<div class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[80%]"></div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase truncate">Valgo Dinâmico Joelho</span>
+<div class="flex items-baseline justify-between">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">2.1°</span>
+<span class="font-label-sm text-label-sm text-primary">Risco Baixo</span>
+</div>
+<div class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[20%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- COLUNA DIREITA: KPIS, AI ENGINE & RADAR (5 COLS) -->
+<!-- ============================================== -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<!-- 4 CARDS CIRCULARES RADIAIS (GAUGES / ANÉIS RADIAIS SVG) -->
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- GAUGE 1: IPB -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-lg flex flex-col items-center text-center gap-space-xs relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute top-0 left-0 right-0 h-0.5 bg-primary"></div>
+<div class="relative w-24 h-24 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#262a33" stroke-width="7"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#10b981" stroke-dasharray="251.2" stroke-dashoffset="30.14" stroke-linecap="round" stroke-width="7"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-md text-headline-md font-bold text-primary">88</span>
+<span class="font-label-sm text-label-sm text-outline">/100</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm uppercase font-bold text-on-surface tracking-wider">IPB • Prontidão</span>
+<span class="px-2 py-0.5 rounded bg-primary-container/15 text-primary font-label-sm text-label-sm font-semibold">Faixa Ótima</span>
+</div>
+<!-- GAUGE 2: SPE -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-lg flex flex-col items-center text-center gap-space-xs relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute top-0 left-0 right-0 h-0.5 bg-secondary"></div>
+<div class="relative w-24 h-24 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#262a33" stroke-width="7"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#4cd7f6" stroke-dasharray="251.2" stroke-dashoffset="15.07" stroke-linecap="round" stroke-width="7"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-md text-headline-md font-bold text-secondary">94</span>
+<span class="font-label-sm text-label-sm text-outline">/100</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm uppercase font-bold text-on-surface tracking-wider">SPE • Explosão</span>
+<span class="px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-sm text-label-sm font-semibold">Nível Elite</span>
+</div>
+<!-- GAUGE 3: IETP -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-lg flex flex-col items-center text-center gap-space-xs relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute top-0 left-0 right-0 h-0.5 bg-primary"></div>
+<div class="relative w-24 h-24 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#262a33" stroke-width="7"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#10b981" stroke-dasharray="251.2" stroke-dashoffset="37.68" stroke-linecap="round" stroke-width="7"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-md text-headline-md font-bold text-primary">85</span>
+<span class="font-label-sm text-label-sm text-outline">/100</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm uppercase font-bold text-on-surface tracking-wider">IETP • Técnica</span>
+<span class="px-2 py-0.5 rounded bg-primary-container/15 text-primary font-label-sm text-label-sm font-semibold">Consistente</span>
+</div>
+<!-- GAUGE 4: IPS -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-lg flex flex-col items-center text-center gap-space-xs relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute top-0 left-0 right-0 h-0.5 bg-tertiary"></div>
+<div class="relative w-24 h-24 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#262a33" stroke-width="7"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#ffb95f" stroke-dasharray="251.2" stroke-dashoffset="22.6" stroke-linecap="round" stroke-width="7"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-md text-headline-md font-bold text-tertiary">91</span>
+<span class="font-label-sm text-label-sm text-outline">/100</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm uppercase font-bold text-on-surface tracking-wider">IPS • Scouting</span>
+<span class="px-2 py-0.5 rounded bg-tertiary/15 text-tertiary font-label-sm text-label-sm font-semibold">Alto Valor Mercado</span>
+</div>
+</div>
+<!-- CARD INSIGHT AUTOMATIZADO DA IA (AI PREDICTIVE ENGINE) -->
+<div class="bg-gradient-to-br from-surface-container-low via-surface-container-high to-surface-container-low rounded-xl p-space-md shadow-xl flex flex-col gap-space-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
+</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">psychology</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Síntese Biomecânica Gerada por IA</h2>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest font-label-sm text-label-sm text-secondary font-semibold">KinePitch Brain v4.2</span>
+</div>
+<!-- Texto Analítico Verbatim Solicitado -->
+<p class="font-body-md text-body-md text-on-surface leading-relaxed bg-surface-container-lowest/60 p-space-sm rounded-lg">
+          “Velocidade de pico de <strong class="text-secondary font-bold">33,4 km/h</strong> (Top 5% da categoria). Assimetria bilateral de <strong class="text-primary font-bold">6%</strong> (dentro da zona segura). Alta estabilidade de tronco na finalização.”
+        </p>
+<!-- Métricas Adicionais de Apoio ao Scout & Fisiologia -->
+<div class="grid grid-cols-2 gap-space-sm pt-1">
+<div class="flex items-center justify-between p-2.5 bg-surface-container-lowest rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline uppercase">Carga ACWR</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">1.05</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-primary-container/15 text-primary font-label-sm text-label-sm font-semibold">Ideal (Sweet Spot)</span>
+</div>
+<div class="flex items-center justify-between p-2.5 bg-surface-container-lowest rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline uppercase">Torque Valgo</span>
+<span class="font-headline-sm text-headline-sm font-bold text-secondary">2.1°</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-sm text-label-sm font-semibold">Baixo Risco LCA</span>
+</div>
+</div>
+</div>
+<!-- GRÁFICO DE RADAR: 5 EIXOS VALÊNCIAS FÍSICO-BIOMECÂNICAS -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">radar</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Radar de Valências Biomecânicas</h2>
+</div>
+<span class="font-label-sm text-label-sm text-outline">5 Eixos Cinemáticos</span>
+</div>
+<!-- Canvas SVG do Gráfico de Radar -->
+<div class="relative w-full aspect-[4/3] flex items-center justify-center">
+<svg class="w-full h-full" fill="none" viewbox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="lucasPolygon" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.45"></stop>
+<stop offset="100%" stop-color="#10b981" stop-opacity="0.25"></stop>
+</lineargradient>
+</defs>
+<!-- Centro do Radar: (200, 175) Raio Máximo: 120 -->
+<!-- Web Circles / Concentric Pentagons -->
+<!-- Nível 25% -->
+<polygon fill="none" points="200,145 228,165 217,199 183,199 172,165" stroke="#31353e" stroke-width="1"></polygon>
+<!-- Nível 50% -->
+<polygon fill="none" points="200,115 257,156 235,223 165,223 143,156" stroke="#31353e" stroke-width="1"></polygon>
+<!-- Nível 75% -->
+<polygon fill="none" points="200,85 285,147 253,248 147,248 115,147" stroke="#31353e" stroke-width="1"></polygon>
+<!-- Nível 100% -->
+<polygon fill="none" points="200,55 314,138 271,272 129,272 86,138" stroke="#3c4a42" stroke-width="1.5"></polygon>
+<!-- Eixos Radiais de 5 Pontas -->
+<!-- Eixo 1: Aceleração (0-10m) - Topo -->
+<line stroke="#3c4a42" stroke-dasharray="3 3" stroke-width="1" x1="200" x2="200" y1="175" y2="55"></line>
+<!-- Eixo 2: Velocidade Final (Sprint Peak) - Superior Direito -->
+<line stroke="#3c4a42" stroke-dasharray="3 3" stroke-width="1" x1="200" x2="314" y1="175" y2="138"></line>
+<!-- Eixo 3: Impulsão Vertical (CMJ/RSI) - Inferior Direito -->
+<line stroke="#3c4a42" stroke-dasharray="3 3" stroke-width="1" x1="200" x2="271" y1="175" y2="272"></line>
+<!-- Eixo 4: Simetria Bilateral - Inferior Esquerdo -->
+<line stroke="#3c4a42" stroke-dasharray="3 3" stroke-width="1" x1="200" x2="129" y1="175" y2="272"></line>
+<!-- Eixo 5: Agilidade / COD - Superior Esquerdo -->
+<line stroke="#3c4a42" stroke-dasharray="3 3" stroke-width="1" x1="200" x2="86" y1="175" y2="138"></line>
+<!-- Camada 1: Média da Categoria Sub-17 (Cinza pontilhado) -->
+<!-- Scores aproximados: Ace=65%, Vel=68%, Imp=60%, Sim=70%, COD=65% -->
+<polygon fill="#86948a" fill-opacity="0.1" points="200,97 277,150 242,233 151,242 125,151" stroke="#86948a" stroke-dasharray="4 3" stroke-width="1.5"></polygon>
+<!-- Camada 2: Benchmark Profissional Série A / Premier League (Verde Neon / Gold) -->
+<!-- Scores aproximados: Ace=90%, Vel=92%, Imp=88%, Sim=86%, COD=89% -->
+<polygon fill="none" opacity="0.6" points="200,67 304,141 262,260 139,258 98,142" stroke="#10b981" stroke-dasharray="2 2" stroke-width="1.5"></polygon>
+<!-- Camada 3: Lucas Silveira (Atleta Ativo - Ciano Neon Destaque) -->
+<!-- Scores: Ace: 93%, Vel: 96%, Imp: 82%, Sim: 94%, COD: 88% -->
+<polygon fill="url(#lucasPolygon)" filter="drop-shadow(0 0 8px rgba(76,215,246,0.3))" points="200,63 309,139 258,254 133,266 99,142" stroke="#4cd7f6" stroke-width="2.5"></polygon>
+<!-- Pontos Articulares do Lucas no Radar -->
+<circle cx="200" cy="63" fill="#4cd7f6" r="4"></circle>
+<circle cx="309" cy="139" fill="#4cd7f6" r="4"></circle>
+<circle cx="258" cy="254" fill="#4cd7f6" r="4"></circle>
+<circle cx="133" cy="266" fill="#4cd7f6" r="4"></circle>
+<circle cx="99" cy="142" fill="#4cd7f6" r="4"></circle>
+<!-- Labels dos 5 Eixos -->
+<text fill="#dfe2ee" font-family="Space Grotesk" font-size="11" font-weight="600" text-anchor="middle" x="200" y="38">1. Aceleração (0-10m)</text>
+<text fill="#dfe2ee" font-family="Space Grotesk" font-size="11" font-weight="600" text-anchor="start" x="325" y="138">2. Velocidade Final</text>
+<text fill="#dfe2ee" font-family="Space Grotesk" font-size="11" font-weight="600" text-anchor="start" x="282" y="295">3. Impulsão Vertical</text>
+<text fill="#dfe2ee" font-family="Space Grotesk" font-size="11" font-weight="600" text-anchor="end" x="118" y="295">4. Simetria Bilateral</text>
+<text fill="#dfe2ee" font-family="Space Grotesk" font-size="11" font-weight="600" text-anchor="end" x="75" y="138">5. Agilidade (COD)</text>
+</svg>
+</div>
+<!-- Legenda Comparativa Interativa das 3 Camadas -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs pt-1 px-1 bg-surface-container rounded-lg p-space-sm font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-secondary shadow-[0_0_6px_rgba(76,215,246,0.8)]"></span>
+<span class="text-on-surface font-semibold">Lucas Silveira (Atleta)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 bg-primary"></span>
+<span class="text-primary font-medium">Pro Benchmark Série A</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 bg-outline border-dashed"></span>
+<span class="text-outline">Média Sub-17 Brasil</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TOAST / MODAL SIMULADO DE SUCESSO AO EXPORTAR (INTERAÇÃO CLIENT-SIDE) -->
+<div class="fixed bottom-6 right-6 bg-surface-container-high px-space-md py-space-sm rounded-lg shadow-2xl flex items-center gap-space-sm z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="toastNotification">
+<span class="material-symbols-outlined text-primary text-[24px]">task_alt</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="toastTitle">Relatório PDF Gerado</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="toastDesc">O dossiê técnico de Lucas Silveira está pronto para download.</span>
+</div>
+</div>
+<script>
+    // Micro-interações nos botões de ação e exportação
+    const btnExportPdf = document.getElementById('btnExportPdf');
+    const btnShareModal = document.getElementById('btnShareModal');
+    const toast = document.getElementById('toastNotification');
+    const toastTitle = document.getElementById('toastTitle');
+    const toastDesc = document.getElementById('toastDesc');
+
+    function showToast(title, desc) {
+      if (!toast) return;
+      toastTitle.textContent = title;
+      toastDesc.textContent = desc;
+      toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      }, 4000);
+    }
+
+    if (btnExportPdf) {
+      btnExportPdf.addEventListener('click', () => {
+        showToast('PDF Executivo Gerado!', 'Relatório biométrico 4K de Lucas Silveira pronto para envio à diretoria.');
+      });
+    }
+
+    if (btnShareModal) {
+      btnShareModal.addEventListener('click', () => {
+        showToast('Link Seguro Copiado!', 'Acesso criptografado com expiração de 48h pronto para partilha.');
+      });
+    }
+  </script>
+</div></main></div></body></html>

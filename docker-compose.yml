@@ -1,0 +1,186 @@
+# ==============================================================================
+# 5PLAY SPORTS | KINEPITCH AI
+# Etapa 1: Infraestrutura Local & Staging (PostgreSQL + Redis + MinIO S3)
+# ==============================================================================
+
+name: 5play-kinepitch-infra
+
+services:
+  # ----------------------------------------------------------------------------
+  # 1. PostgreSQL 16 - Banco Relacional Principal (Telemetria, Atletas & LGPD)
+  # ----------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: 5play-postgres
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-kinepitch_db}
+      POSTGRES_USER: ${POSTGRES_USER:-kinepitch_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme_dev_only}
+      TZ: America/Sao_Paulo
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-kinepitch_app} -d ${POSTGRES_DB:-kinepitch_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kinepitch-net
+
+  # ----------------------------------------------------------------------------
+  # 2. Redis 7 - Filas de Processamento Assíncrono (BullMQ / Inferência GPU)
+  # ----------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: 5play-redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --appendonly yes
+      --maxmemory 512mb
+      --maxmemory-policy noeviction
+      --requirepass ${REDIS_PASSWORD:-changeme_redis_dev}
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-changeme_redis_dev}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kinepitch-net
+
+  # ----------------------------------------------------------------------------
+  # 3. MinIO - Object Storage Compatível com AWS S3 (Vídeos 4K, Overlays & PDFs)
+  # ----------------------------------------------------------------------------
+  minio:
+    image: minio/minio:latest
+    container_name: 5play-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    ports:
+      - "${MINIO_API_PORT:-9000}:9000"       # Endpoint S3 API
+      - "${MINIO_CONSOLE_PORT:-9001}:9001" # Console Web Administrativo
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-kinepitch_s3_admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-changeme_minio_dev}
+      MINIO_BROWSER_REDIRECT_URL: http://localhost:9001
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kinepitch-net
+
+  # ----------------------------------------------------------------------------
+  # 4. MinIO Bucket Bootstrap - Provisiona Buckets Privados Automaticamente
+  # ----------------------------------------------------------------------------
+  minio-init:
+    image: minio/mc:latest
+    container_name: 5play-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set kinepitch http://minio:9000 ${MINIO_ROOT_USER:-kinepitch_s3_admin} ${MINIO_ROOT_PASSWORD:-changeme_minio_dev};
+      mc mb --ignore-existing kinepitch/kinepitch-videos-raw;
+      mc mb --ignore-existing kinepitch/kinepitch-videos-overlay;
+      mc mb --ignore-existing kinepitch/kinepitch-dossiers-pdf;
+      mc anonymous set none kinepitch/kinepitch-videos-raw;
+      mc anonymous set none kinepitch/kinepitch-videos-overlay;
+      mc anonymous set none kinepitch/kinepitch-dossiers-pdf;
+      exit 0;
+      "
+    networks:
+      - kinepitch-net
+
+  # ----------------------------------------------------------------------------
+  # 5. Backend FastAPI - API REST, Upload Assinado S3 & Compartilhamento B2B
+  # ----------------------------------------------------------------------------
+  fastapi:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: 5play-fastapi
+    restart: unless-stopped
+    ports:
+      - "${FASTAPI_PORT:-8000}:8000"
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-kinepitch_db}
+      POSTGRES_USER: ${POSTGRES_USER:-kinepitch_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme_dev_only}
+      REDIS_URL: redis://:${REDIS_PASSWORD:-changeme_redis_dev}@redis:6379/0
+      S3_ENDPOINT_URL: http://minio:9000
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-kinepitch_s3_admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-changeme_minio_dev}
+      S3_BUCKET_RAW: kinepitch-videos-raw
+      S3_BUCKET_OVERLAY: kinepitch-videos-overlay
+      PUBLIC_APP_URL: ${PUBLIC_APP_URL:-http://localhost:8000}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    networks:
+      - kinepitch-net
+
+  # ----------------------------------------------------------------------------
+  # 6. Celery Worker - Processamento Assíncrono OpenCV + YOLOv8-Pose
+  # ----------------------------------------------------------------------------
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: 5play-celery-worker
+    restart: unless-stopped
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-kinepitch_db}
+      POSTGRES_USER: ${POSTGRES_USER:-kinepitch_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme_dev_only}
+      REDIS_URL: redis://:${REDIS_PASSWORD:-changeme_redis_dev}@redis:6379/0
+      S3_ENDPOINT_URL: http://minio:9000
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-kinepitch_s3_admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-changeme_minio_dev}
+      S3_BUCKET_RAW: kinepitch-videos-raw
+      S3_BUCKET_OVERLAY: kinepitch-videos-overlay
+      YOLO_POSE_MODEL_PATH: ${YOLO_POSE_MODEL_PATH:-yolov8n-pose.pt}
+      WORKER_NODE_NAME: celery-vision-worker-01
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    command: ["celery", "-A", "tasks", "worker", "--loglevel=info", "--concurrency=2"]
+    networks:
+      - kinepitch-net
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  minio_data:
+    driver: local
+
+networks:
+  kinepitch-net:
+    driver: bridge
