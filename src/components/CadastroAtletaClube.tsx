@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState, type FormEvent } from 'react';
 import {
+  AlertTriangle,
   Building2,
   CheckCircle2,
   Lock,
@@ -87,6 +88,7 @@ export function CadastroAtletaClube({
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [needsAuth, setNeedsAuth] = useState(false);
+  const [backendOfflineMsg, setBackendOfflineMsg] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
 
   // Formulário Atleta
@@ -165,6 +167,7 @@ export function CadastroAtletaClube({
   const loadAll = useCallback(async () => {
     setLoading(true);
     setNeedsAuth(false);
+    setBackendOfflineMsg(null);
     try {
       const [cData, aData, lData, bData, wData] = await Promise.all([
         fetchClubes(),
@@ -184,8 +187,18 @@ export function CadastroAtletaClube({
       }
     } catch (err) {
       const parsed = extractApiError(err, 'Falha ao carregar cadastros.');
-      if (parsed.status === 401) setNeedsAuth(true);
-      else setFeedback({ type: 'err', text: parsed.message });
+      if (parsed.status === 401) {
+        setNeedsAuth(true);
+      } else if (parsed.isBackendUnavailable) {
+        setClubes([]);
+        setAtletas([]);
+        setLgpds([]);
+        setBenchmarks([]);
+        setWebhooks([]);
+        setBackendOfflineMsg(parsed.message);
+      } else {
+        setFeedback({ type: 'err', text: parsed.message });
+      }
     } finally {
       setLoading(false);
     }
@@ -493,6 +506,22 @@ export function CadastroAtletaClube({
           </button>
         </div>
       </div>
+
+      {backendOfflineMsg && (
+        <div className="bg-[#F59E0B]/10 border border-[#F59E0B]/40 rounded-md px-4 py-3 text-xs text-[#FCD34D] flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 shrink-0 text-[#F59E0B]" />
+            <span>{backendOfflineMsg}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => void loadAll()}
+            className="text-[#F9FAFB] underline cursor-pointer whitespace-nowrap"
+          >
+            Tentar Reconectar
+          </button>
+        </div>
+      )}
 
       {feedback && (
         <div

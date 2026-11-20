@@ -13,6 +13,7 @@ import {
   X,
 } from 'lucide-react';
 import {
+  EMPTY_DASHBOARD,
   enqueueSessaoUploadApi,
   extractApiError,
   fetchAtletas,
@@ -52,6 +53,7 @@ export function DashboardGeral({
 
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [backendOfflineMsg, setBackendOfflineMsg] = useState<string | null>(null);
   const [needsAuth, setNeedsAuth] = useState(false);
 
   // Modal de Upload Assíncrono (202 Accepted)
@@ -75,6 +77,7 @@ export function DashboardGeral({
   const loadAll = useCallback(async () => {
     setLoading(true);
     setErrorMsg(null);
+    setBackendOfflineMsg(null);
     setNeedsAuth(false);
     try {
       const clubeParam = selectedClubeId === '' ? undefined : Number(selectedClubeId);
@@ -97,6 +100,12 @@ export function DashboardGeral({
       const parsed = extractApiError(err, 'Falha ao carregar telemetria do Dashboard.');
       if (parsed.status === 401) {
         setNeedsAuth(true);
+      } else if (parsed.isBackendUnavailable) {
+        setDashboard(EMPTY_DASHBOARD);
+        setSessoes([]);
+        setClubes([]);
+        setAtletas([]);
+        setBackendOfflineMsg(parsed.message);
       } else {
         setErrorMsg(parsed.message);
       }
@@ -262,6 +271,22 @@ export function DashboardGeral({
           </button>
         </div>
       </div>
+
+      {backendOfflineMsg && (
+        <div className="bg-[#F59E0B]/10 border border-[#F59E0B]/40 rounded-md px-4 py-3 text-xs text-[#FCD34D] flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 shrink-0 text-[#F59E0B]" />
+            <span>{backendOfflineMsg}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => void loadAll()}
+            className="text-[#F9FAFB] underline cursor-pointer whitespace-nowrap"
+          >
+            Reconectar
+          </button>
+        </div>
+      )}
 
       {errorMsg && (
         <div className="bg-[#EF4444]/10 border border-[#EF4444]/40 rounded-md px-4 py-3 text-xs text-[#FCA5A5] flex items-center justify-between gap-3">

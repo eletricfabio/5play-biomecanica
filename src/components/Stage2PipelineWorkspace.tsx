@@ -7,6 +7,7 @@ import {
   UploadCloud,
   XCircle,
 } from 'lucide-react';
+import { normalizeErrorText } from '../services/api';
 
 interface ClubeOption {
   id: number;
@@ -150,7 +151,7 @@ export function Stage2PipelineWorkspace({
     } catch (error) {
       setFeedback({
         type: 'err',
-        text: error instanceof Error ? error.message : 'Erro ao carregar dados da Etapa 2.',
+        text: normalizeErrorText(error, 'Erro ao carregar dados da Etapa 2.'),
       });
     } finally {
       setLoading(false);
@@ -188,7 +189,7 @@ export function Stage2PipelineWorkspace({
     } catch (error) {
       setFeedback({
         type: 'err',
-        text: error instanceof Error ? error.message : 'Falha ao enfileirar análise biomecânica.',
+        text: normalizeErrorText(error, 'Falha ao enfileirar análise biomecânica.'),
       });
     }
   };
@@ -219,7 +220,7 @@ export function Stage2PipelineWorkspace({
     } catch (error) {
       setFeedback({
         type: 'err',
-        text: error instanceof Error ? error.message : 'Falha ao compartilhar dossiê B2B.',
+        text: normalizeErrorText(error, 'Falha ao compartilhar dossiê B2B.'),
       });
     }
   };

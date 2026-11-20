@@ -1,10 +1,13 @@
 import axios, { type AxiosError } from 'axios';
 import { auth } from '../lib/firebase';
 
+const RAW_BASE_URL = (import.meta.env.VITE_FASTAPI_URL || '').trim().replace(/\/+$/, '');
+
 export const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_FASTAPI_URL || '',
+  baseURL: RAW_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
+    Accept: 'application/json',
   },
   timeout: 15000,
 });
@@ -18,16 +21,125 @@ apiClient.interceptors.request.use(async (config) => {
   return config;
 });
 
-export function extractApiError(err: unknown, fallback = 'Erro de comunicação com a API.'): {
+// Detecta quando um host estático (ex.: Vercel SPA rewrite) devolve index.html em vez de JSON
+apiClient.interceptors.response.use(
+  (response) => {
+    const contentType = String(response.headers?.['content-type'] || '').toLowerCase();
+    if (
+      contentType.includes('text/html') ||
+      (typeof response.data === 'string' && response.data.trim().toLowerCase().startsWith('<!doctype'))
+    ) {
+      const err = new Error(
+        'O servidor respondeu HTML em vez de JSON para /api/v1. Verifique se o backend está publicado ou configure VITE_FASTAPI_URL.'
+      ) as Error & { isBackendUnavailable?: boolean; status?: number };
+      err.isBackendUnavailable = true;
+      err.status = 404;
+      return Promise.reject(err);
+    }
+    return response;
+  },
+  (error) => Promise.reject(error)
+);
+
+/**
+ * Normaliza qualquer formato de erro (string, Error, objeto {code, message}, array Pydantic 422)
+ * para uma string segura — evitando o erro React #31 ao renderizar erros no JSX.
+ */
+export function normalizeErrorText(value: unknown, fallback = 'Erro de comunicação com a API.'): string {
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (!trimmed) return fallback;
+    if (trimmed.toLowerCase().startsWith('<!doctype') || trimmed.toLowerCase().startsWith('<html')) {
+      return fallback;
+    }
+    return trimmed;
+  }
+
+  if (Array.isArray(value)) {
+    const parts = value
+      .map((item) => normalizeErrorText(item, ''))
+      .filter(Boolean);
+    return parts.length > 0 ? parts.join(' | ') : fallback;
+  }
+
+  if (value && typeof value === 'object') {
+    const obj = value as Record<string, unknown>;
+    for (const key of ['detail', 'message', 'msg', 'error', 'title', 'statusText']) {
+      if (obj[key] !== undefined && obj[key] !== null) {
+        const nested = normalizeErrorText(obj[key], '');
+        if (nested) {
+          const code = typeof obj.code === 'string' || typeof obj.code === 'number' ? String(obj.code) : '';
+          return code && !nested.includes(code) ? `[${code}] ${nested}` : nested;
+        }
+      }
+    }
+    try {
+      const serialized = JSON.stringify(obj);
+      return serialized && serialized !== '{}' ? serialized : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  if (typeof value === 'number' || typeof value === 'boolean') {
+    return String(value);
+  }
+
+  return fallback;
+}
+
+export interface ParsedApiError {
   message: string;
   status: number | null;
-} {
-  const axiosErr = err as AxiosError<{ detail?: string; error?: string }>;
+  isBackendUnavailable: boolean;
+}
+
+export function extractApiError(
+  err: unknown,
+  fallback = 'Erro de comunicação com a API.'
+): ParsedApiError {
+  const customErr = err as { isBackendUnavailable?: boolean; status?: number; message?: unknown };
+  if (customErr?.isBackendUnavailable) {
+    return {
+      message: normalizeErrorText(customErr.message, fallback),
+      status: customErr.status ?? 404,
+      isBackendUnavailable: true,
+    };
+  }
+
+  const axiosErr = err as AxiosError<{ detail?: unknown; error?: unknown; message?: unknown }>;
   const status = axiosErr?.response?.status ?? null;
-  const detail = axiosErr?.response?.data?.detail || axiosErr?.response?.data?.error;
-  if (detail) return { message: detail, status };
-  if (err instanceof Error && err.message) return { message: err.message, status };
-  return { message: fallback, status };
+  const isNetworkError = Boolean(axiosErr?.isAxiosError && !axiosErr?.response);
+  const isBackendUnavailable =
+    isNetworkError || status === 404 || status === 502 || status === 503 || status === 504;
+
+  const rawPayload =
+    axiosErr?.response?.data?.detail ??
+    axiosErr?.response?.data?.error ??
+    axiosErr?.response?.data?.message ??
+    axiosErr?.response?.data;
+
+  const normalized = normalizeErrorText(
+    rawPayload ?? (err instanceof Error ? err.message : err),
+    fallback
+  );
+
+  if (isBackendUnavailable) {
+    const hint = RAW_BASE_URL
+      ? `Backend configurado em (${RAW_BASE_URL}) não respondeu corretamente (HTTP ${status ?? 'rede'}).`
+      : `Backend FastAPI/Express não publicado neste domínio (HTTP ${status ?? '404'}). Configure a variável VITE_FASTAPI_URL na Vercel.`;
+    return {
+      message: hint,
+      status,
+      isBackendUnavailable: true,
+    };
+  }
+
+  return {
+    message: normalized,
+    status,
+    isBackendUnavailable: false,
+  };
 }
 
 export interface PontoOptico3D {
@@ -86,6 +198,18 @@ export interface DashboardOverview {
   acwr_medio_elenco: number;
   atletas_monitorados: DashboardAtletaResumo[];
 }
+
+export const EMPTY_DASHBOARD: DashboardOverview = {
+  total_clubes_ativos: 0,
+  total_atletas: 0,
+  total_sessoes_concluidas: 0,
+  eficiencia_biomecanica_media_pct: 0,
+  velocidade_pico_media_kmh: 0,
+  velocidade_pico_max_kmh: 0,
+  assimetrias_criticas_count: 0,
+  acwr_medio_elenco: 0,
+  atletas_monitorados: [],
+};
 
 export interface ClubeItem {
   id: number;
@@ -450,12 +574,18 @@ export async function fetchDashboard(clubeId?: number): Promise<DashboardOvervie
   const res = await apiClient.get<DashboardOverview>('/api/v1/dashboard', {
     params: clubeId ? { clube_id: clubeId } : undefined,
   });
-  return res.data;
+  return {
+    ...EMPTY_DASHBOARD,
+    ...(res.data && typeof res.data === 'object' ? res.data : {}),
+    atletas_monitorados: Array.isArray(res.data?.atletas_monitorados)
+      ? res.data.atletas_monitorados
+      : [],
+  };
 }
 
 export async function fetchClubes(): Promise<ClubeItem[]> {
   const res = await apiClient.get<ClubeItem[]>('/api/v1/clubes');
-  return res.data;
+  return Array.isArray(res.data) ? res.data : [];
 }
 
 export async function createClubeApi(payload: CreateClubePayload): Promise<ClubeItem> {
@@ -467,7 +597,7 @@ export async function fetchAtletas(clubeId?: number): Promise<AtletaItem[]> {
   const res = await apiClient.get<AtletaItem[]>('/api/v1/atletas', {
     params: clubeId ? { clube_id: clubeId } : undefined,
   });
-  return res.data;
+  return Array.isArray(res.data) ? res.data : [];
 }
 
 export async function createAtletaApi(payload: CreateAtletaPayload): Promise<AtletaItem> {
@@ -477,7 +607,7 @@ export async function createAtletaApi(payload: CreateAtletaPayload): Promise<Atl
 
 export async function fetchLgpd(): Promise<LgpdItem[]> {
   const res = await apiClient.get<LgpdItem[]>('/api/v1/lgpd');
-  return res.data;
+  return Array.isArray(res.data) ? res.data : [];
 }
 
 export async function validarLgpdApi(payload: {
@@ -492,7 +622,7 @@ export async function validarLgpdApi(payload: {
 
 export async function fetchBenchmarks(): Promise<BenchmarkItem[]> {
   const res = await apiClient.get<BenchmarkItem[]>('/api/v1/benchmarks');
-  return res.data;
+  return Array.isArray(res.data) ? res.data : [];
 }
 
 export async function upsertBenchmarkApi(payload: {
@@ -513,7 +643,7 @@ export async function upsertBenchmarkApi(payload: {
 
 export async function fetchSessoes(): Promise<SessaoResumoItem[]> {
   const res = await apiClient.get<SessaoResumoItem[]>('/api/v1/sessoes');
-  return res.data;
+  return Array.isArray(res.data) ? res.data : [];
 }
 
 export async function fetchSessaoDetalhe(sessaoId: number): Promise<SessaoDetalheResponse> {
@@ -530,7 +660,7 @@ export async function enqueueSessaoUploadApi(
 
 export async function fetchWebhooks(): Promise<WebhookItem[]> {
   const res = await apiClient.get<WebhookItem[]>('/api/v1/webhooks');
-  return res.data;
+  return Array.isArray(res.data) ? res.data : [];
 }
 
 export async function createWebhookApi(payload: {
@@ -546,7 +676,7 @@ export async function createWebhookApi(payload: {
 
 export async function fetchCompartilhamentos(): Promise<CompartilhamentoItem[]> {
   const res = await apiClient.get<CompartilhamentoItem[]>('/api/v1/compartilhamentos');
-  return res.data;
+  return Array.isArray(res.data) ? res.data : [];
 }
 
 export async function shareB2BDossierApi(payload: {
@@ -563,8 +693,8 @@ export async function shareB2BDossierApi(payload: {
 }
 
 export async function fetchPublicB2BDossier(token: string): Promise<PublicB2BDossierResponse> {
-  const res = await axios.get<PublicB2BDossierResponse>(
-    `${import.meta.env.VITE_FASTAPI_URL || ''}/api/v1/compartilhamentos/publico/${encodeURIComponent(token)}`
+  const res = await apiClient.get<PublicB2BDossierResponse>(
+    `/api/v1/compartilhamentos/publico/${encodeURIComponent(token)}`
   );
   return res.data;
 }

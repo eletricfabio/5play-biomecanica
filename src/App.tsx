@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { Component, useCallback, useEffect, useState, type ErrorInfo, type ReactNode } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { normalizeErrorText } from './services/api';
 import { Sidebar, type AppView } from './components/Sidebar';
 import { DashboardGeral } from './components/DashboardGeral';
 import { AnaliseBiomecanica } from './components/AnaliseBiomecanica';
@@ -49,15 +50,24 @@ function KinePitchStudioShell() {
         fetch('/api/architecture/artifacts'),
         fetch('/api/stage2/artifacts'),
       ]);
-      if (!stage1Res.ok || !stage2Res.ok) {
-        throw new Error('Falha ao carregar artefatos de arquitetura.');
+      const s1Type = String(stage1Res.headers.get('content-type') || '').toLowerCase();
+      const s2Type = String(stage2Res.headers.get('content-type') || '').toLowerCase();
+      if (
+        !stage1Res.ok ||
+        !stage2Res.ok ||
+        s1Type.includes('text/html') ||
+        s2Type.includes('text/html')
+      ) {
+        throw new Error(
+          'Artefatos do servidor não disponíveis neste domínio estático. Publique o backend ou configure o servidor Express.'
+        );
       }
       const [s1, s2] = await Promise.all([stage1Res.json(), stage2Res.json()]);
       setSqlScript(s1.sqlScript || '');
       setDockerCompose(s1.dockerCompose || '');
       setPythonFiles(s2.files || {});
     } catch (err) {
-      setArtifactError(err instanceof Error ? err.message : 'Erro ao carregar artefatos.');
+      setArtifactError(normalizeErrorText(err, 'Erro ao carregar artefatos de arquitetura.'));
     } finally {
       setLoadingArtifacts(false);
     }
@@ -296,10 +306,66 @@ function KinePitchStudioShell() {
   );
 }
 
+interface AppErrorBoundaryState {
+  hasError: boolean;
+  errorMessage: string;
+}
+
+class AppErrorBoundary extends Component<{ children: ReactNode }, AppErrorBoundaryState> {
+  state: AppErrorBoundaryState = {
+    hasError: false,
+    errorMessage: '',
+  };
+
+  static getDerivedStateFromError(error: unknown): AppErrorBoundaryState {
+    return {
+      hasError: true,
+      errorMessage: normalizeErrorText(error, 'Erro inesperado na renderização da interface.'),
+    };
+  }
+
+  componentDidCatch(error: unknown, info: ErrorInfo) {
+    console.error('[KinePitchStudio] Erro capturado pelo ErrorBoundary:', error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-[#0B0F17] text-[#E5E7EB] flex items-center justify-center p-6">
+          <div className="max-w-lg w-full bg-[#111827] border border-[#F59E0B]/40 rounded-lg p-8 space-y-4">
+            <h1 className="text-lg font-bold text-[#F9FAFB]">
+              Recuperação Segura · 5Play Sports KinePitch AI
+            </h1>
+            <p className="text-xs text-[#9CA3AF] leading-relaxed">
+              Ocorreu uma falha de comunicação ou renderização. Nenhum dado local foi perdido.
+            </p>
+            <div className="bg-[#0B0F17] border border-[#1F2937] rounded p-3 text-xs font-mono-tabular text-[#FCD34D] break-words">
+              {this.state.errorMessage}
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                this.setState({ hasError: false, errorMessage: '' });
+                window.location.reload();
+              }}
+              className="px-4 py-2 text-xs font-semibold text-[#042116] bg-[#10B981] hover:bg-[#059669] rounded-md cursor-pointer"
+            >
+              Recarregar Painel
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export default function App() {
   return (
-    <AuthProvider>
-      <KinePitchStudioShell />
-    </AuthProvider>
+    <AppErrorBoundary>
+      <AuthProvider>
+        <KinePitchStudioShell />
+      </AuthProvider>
+    </AppErrorBoundary>
   );
 }

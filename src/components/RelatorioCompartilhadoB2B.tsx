@@ -36,9 +36,11 @@ export function RelatorioCompartilhadoB2B({
   const [recentShares, setRecentShares] = useState<CompartilhamentoItem[]>([]);
 
   const [loading, setLoading] = useState(false);
-  const [errorState, setErrorState] = useState<{ status: number | null; message: string } | null>(
-    null
-  );
+  const [errorState, setErrorState] = useState<{
+    status: number | null;
+    message: string;
+    isBackendUnavailable?: boolean;
+  } | null>(null);
   const [copied, setCopied] = useState(false);
 
   const loadDossier = useCallback(async (tok: string) => {
@@ -184,11 +186,22 @@ export function RelatorioCompartilhadoB2B({
         <div className="bg-[#111827] border border-[#EF4444]/40 rounded-lg p-8 text-center space-y-3 max-w-xl mx-auto">
           <AlertCircle className="w-8 h-8 text-[#EF4444] mx-auto" />
           <h2 className="text-base font-bold text-[#F9FAFB]">
-            {errorState.status === 410
-              ? 'Link de Compartilhamento Expirado'
-              : 'Dossiê Não Encontrado ou Revogado'}
+            {errorState.isBackendUnavailable
+              ? 'Backend /api/v1 Não Conectado'
+              : errorState.status === 410
+                ? 'Link de Compartilhamento Expirado'
+                : 'Dossiê Não Encontrado ou Revogado'}
           </h2>
           <p className="text-xs text-[#9CA3AF]">{errorState.message}</p>
+          {errorState.isBackendUnavailable && activeToken && (
+            <button
+              type="button"
+              onClick={() => void loadDossier(activeToken)}
+              className="px-4 py-2 text-xs font-medium text-[#E5E7EB] bg-[#181C24] border border-[#1F2937] rounded-md cursor-pointer"
+            >
+              Tentar Reconectar
+            </button>
+          )}
         </div>
       )}
 

@@ -63,6 +63,7 @@ export function AnaliseBiomecanica({
   const [loadingList, setLoadingList] = useState(true);
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [needsAuth, setNeedsAuth] = useState(false);
+  const [backendOfflineMsg, setBackendOfflineMsg] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   // Player & Overlay Controls
@@ -89,6 +90,7 @@ export function AnaliseBiomecanica({
   const loadSessions = useCallback(async () => {
     setLoadingList(true);
     setErrorMsg(null);
+    setBackendOfflineMsg(null);
     setNeedsAuth(false);
     try {
       const [sessoesData, clubesData] = await Promise.all([fetchSessoes(), fetchClubes()]);
@@ -101,8 +103,15 @@ export function AnaliseBiomecanica({
       }
     } catch (err) {
       const parsed = extractApiError(err, 'Falha ao carregar sessões biomecânicas.');
-      if (parsed.status === 401) setNeedsAuth(true);
-      else setErrorMsg(parsed.message);
+      if (parsed.status === 401) {
+        setNeedsAuth(true);
+      } else if (parsed.isBackendUnavailable) {
+        setSessoes([]);
+        setClubes([]);
+        setBackendOfflineMsg(parsed.message);
+      } else {
+        setErrorMsg(parsed.message);
+      }
     } finally {
       setLoadingList(false);
     }
@@ -241,11 +250,22 @@ export function AnaliseBiomecanica({
   if (sessoes.length === 0) {
     return (
       <div className="bg-[#111827] border border-[#1F2937] rounded-lg p-10 text-center space-y-4 max-w-2xl mx-auto my-8">
-        <h2 className="text-lg font-bold text-[#F9FAFB]">Nenhuma Análise 3D Encontrada</h2>
+        <h2 className="text-lg font-bold text-[#F9FAFB]">
+          {backendOfflineMsg ? 'Backend /api/v1 Não Conectado' : 'Nenhuma Análise 3D Encontrada'}
+        </h2>
         <p className="text-xs text-[#9CA3AF]">
-          Não há sessões processadas no PostgreSQL ainda. Enfileire uma análise de vídeo no Dashboard Geral ou cadastre um atleta primeiro.
+          {backendOfflineMsg ||
+            errorMsg ||
+            'Não há sessões processadas no PostgreSQL ainda. Enfileire uma análise de vídeo no Dashboard Geral ou cadastre um atleta primeiro.'}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => void loadSessions()}
+            className="px-4 py-2 text-xs font-medium text-[#E5E7EB] bg-[#181C24] border border-[#1F2937] rounded-md cursor-pointer"
+          >
+            Tentar Reconectar
+          </button>
           <button
             type="button"
             onClick={() => onNavigateView('dashboard')}

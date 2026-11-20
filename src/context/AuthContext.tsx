@@ -6,6 +6,7 @@ import {
   type User,
 } from 'firebase/auth';
 import { auth, googleAuthProvider } from '../lib/firebase';
+import { normalizeErrorText } from '../services/api';
 
 interface AuthContextValue {
   user: User | null;
@@ -36,9 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       await signInWithPopup(auth, googleAuthProvider);
     } catch (error) {
-      const msg =
-        error instanceof Error ? error.message : 'Falha na autenticação com Google.';
-      setAuthError(msg);
+      setAuthError(normalizeErrorText(error, 'Falha na autenticação com Google.'));
     }
   };
 

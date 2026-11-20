@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { POSICOES_CAMPO } from '../data/schemaBlueprint';
+import { normalizeErrorText } from '../services/api';
 import { Stage2PipelineWorkspace } from './Stage2PipelineWorkspace';
 
 interface ClubeRow {
@@ -179,9 +180,18 @@ export function LivePostgresWorkspace({ onCountsRefresh }: LivePostgresWorkspace
           ...(init?.headers || {}),
         },
       });
-      const json = await res.json();
+      const contentType = String(res.headers.get('content-type') || '').toLowerCase();
+      if (contentType.includes('text/html')) {
+        throw new Error('Backend não publicado neste domínio (resposta HTML para rota /api).');
+      }
+      const json = await res.json().catch(() => null);
       if (!res.ok) {
-        throw new Error(json?.error || 'Falha na requisição ao servidor.');
+        throw new Error(
+          normalizeErrorText(
+            json?.error ?? json?.detail ?? json,
+            `Falha na requisição ao servidor (HTTP ${res.status}).`
+          )
+        );
       }
       return json;
     },
