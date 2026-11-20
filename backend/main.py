@@ -3,7 +3,9 @@ from __future__ import annotations
 import hashlib
 import hmac
 import json
+import logging
 import os
+import re
 import secrets
 import uuid
 from datetime import date, datetime, timedelta, timezone
@@ -11,8 +13,11 @@ from decimal import Decimal
 
 import httpx
 from fastapi import Depends, FastAPI, HTTPException, Request, status
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from sqlalchemy import func, select
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session, joinedload
 
 from database import get_db
@@ -48,7 +53,10 @@ from schemas import (
     WebhookDispatchStatus,
 )
 from storage import ObjectStorageClient
-from tasks import processar_video_biomecanico
+from tasks import is_redis_configured, processar_video_biomecanico
+from vision_engine import KinePitchVisionEngine
+
+logger = logging.getLogger("kinepitch.api")
 
 app = FastAPI(
     title="5Play Sports | KinePitch AI Backend API",
@@ -56,9 +64,102 @@ app = FastAPI(
     version="2.0.0",
 )
 
+DEFAULT_ALLOWED_ORIGINS = [
+    "https://5play-biomecanica.vercel.app",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5173",
+]
+
+
+def _build_cors_config() -> tuple[list[str], str | None]:
+    raw = os.getenv("CORS_ALLOW_ORIGINS", "*").strip()
+    tokens = [item.strip().rstrip("/") for item in raw.split(",") if item.strip()]
+    allow_all = not tokens or "*" in tokens
+    explicit = list(dict.fromkeys(DEFAULT_ALLOWED_ORIGINS + [t for t in tokens if t != "*"]))
+    origin_regex = r"https?://.*" if allow_all else r"https://5play-biomecanica\.vercel\.app"
+    return explicit, origin_regex
+
+
+ALLOWED_ORIGINS, ALLOWED_ORIGIN_REGEX = _build_cors_config()
+
+
+def _cors_headers_for_request(request: Request) -> dict[str, str]:
+    origin = (request.headers.get("origin") or "").strip().rstrip("/")
+    allowed_origin: str | None = None
+    if origin and (
+        origin in ALLOWED_ORIGINS
+        or (ALLOWED_ORIGIN_REGEX and re.fullmatch(ALLOWED_ORIGIN_REGEX, origin))
+    ):
+        allowed_origin = origin
+    elif not origin:
+        allowed_origin = "https://5play-biomecanica.vercel.app"
+
+    if not allowed_origin:
+        return {}
+
+    return {
+        "Access-Control-Allow-Origin": allowed_origin,
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "*",
+        "Vary": "Origin",
+    }
+
+
+@app.middleware("http")
+async def ensure_cors_on_unhandled_errors(request: Request, call_next):
+    try:
+        response = await call_next(request)
+    except Exception as exc:
+        logger.exception("Erro não tratado na requisição %s %s", request.method, request.url.path)
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={
+                "detail": "Erro interno ao processar a requisição no servidor.",
+                "error": str(exc),
+            },
+            headers=_cors_headers_for_request(request),
+        )
+
+    for header_key, header_val in _cors_headers_for_request(request).items():
+        if header_key not in response.headers:
+            response.headers[header_key] = header_val
+    return response
+
+
+@app.exception_handler(HTTPException)
+async def custom_http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
+    headers = {**(exc.headers or {}), **_cors_headers_for_request(request)}
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail, "error": exc.detail},
+        headers=headers,
+    )
+
+
+@app.exception_handler(RequestValidationError)
+async def custom_validation_exception_handler(
+    request: Request, exc: RequestValidationError
+) -> JSONResponse:
+    mensagens: list[str] = []
+    for err in exc.errors():
+        loc = [str(part) for part in err.get("loc", []) if part != "body"]
+        campo = ".".join(loc) if loc else "payload"
+        msg = str(err.get("msg", "Valor inválido")).replace("Value error, ", "")
+        mensagens.append(f"{campo}: {msg}")
+    resumo = " | ".join(mensagens) if mensagens else "Dados inválidos na requisição."
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={"detail": resumo, "error": resumo, "errors": exc.errors()},
+        headers=_cors_headers_for_request(request),
+    )
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.getenv("CORS_ALLOW_ORIGINS", "*").split(","),
+    allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=ALLOWED_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -534,15 +635,38 @@ def solicitar_upload_e_enfileirar(
     if not atleta.apto_avaliacao_3d:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Captura 3D bloqueada por compliance LGPD pendente ou revogado.",
+            detail="Captura 3D bloqueada por compliance LGPD pendente ou revogado para este atleta.",
         )
+
+    if _calcular_idade_anos(atleta.data_nascimento) < 18:
+        ultimo_termo = db.scalar(
+            select(ConsentimentoLGPD)
+            .where(ConsentimentoLGPD.atleta_id == atleta.id)
+            .order_by(ConsentimentoLGPD.criado_em.desc())
+        )
+        if ultimo_termo is not None and ultimo_termo.status != StatusLgpdEnum.autorizado:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Captura 3D bloqueada: termo LGPD do atleta menor está '{ultimo_termo.status.value}'.",
+            )
+
+    clube_id = payload.clube_id if payload.clube_id is not None else atleta.clube_id
+    if payload.clube_id is not None and payload.clube_id != atleta.clube_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="O clube_id informado não corresponde ao clube vinculado ao atleta.",
+        )
+
+    clube = db.get(Clube, clube_id)
+    if clube is None:
+        raise HTTPException(status_code=404, detail="Clube vinculado não encontrado.")
 
     storage = ObjectStorageClient()
     storage.ensure_bucket_exists(storage.bucket_raw)
 
     codigo_sessao = f"SES-{datetime.now().strftime('%Y%m%d')}-{secrets.token_hex(3).upper()}"
-    safe_filename = payload.nome_arquivo.replace(" ", "_")
-    object_key = f"raw/clube_{payload.clube_id}/atleta_{payload.atleta_id}/{codigo_sessao}_{safe_filename}"
+    safe_filename = re.sub(r"[^a-zA-Z0-9._-]", "_", payload.nome_arquivo.strip()) or "video.mp4"
+    object_key = f"raw/clube_{clube_id}/atleta_{payload.atleta_id}/{codigo_sessao}_{safe_filename}"
 
     expira_em = 900
     signed_url = storage.generate_presigned_upload_url(
@@ -554,13 +678,16 @@ def solicitar_upload_e_enfileirar(
     sessao = SessaoAnalise(
         codigo_sessao=codigo_sessao,
         atleta_id=payload.atleta_id,
-        clube_id=payload.clube_id,
+        clube_id=clube_id,
         tipo_teste=payload.tipo_teste,
         contexto=payload.contexto,
         modo_captura=payload.modo_captura,
         fps_captura=payload.fps_captura,
         resolucao=payload.resolucao,
         distancia_estimada_m=payload.distancia_estimada_m,
+        acwr_carga_aguda_cronica=(
+            Decimal(str(round(payload.acwr, 2))) if payload.acwr is not None else None
+        ),
         status_processamento=(
             StatusProcessamentoEnum.na_fila_redis
             if payload.iniciar_processamento_automatico
@@ -571,13 +698,91 @@ def solicitar_upload_e_enfileirar(
         video_s3_key=object_key,
     )
     db.add(sessao)
-    db.flush()
+    try:
+        db.flush()
+    except SQLAlchemyError as exc:
+        db.rollback()
+        logger.exception("Erro ao criar registro de sessão no PostgreSQL")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Não foi possível criar a sessão de análise com os dados informados.",
+        ) from exc
 
     celery_task_id: str | None = None
-    if payload.iniciar_processamento_automatico:
-        async_result = processar_video_biomecanico.apply_async(args=[sessao.id], countdown=5)
-        celery_task_id = str(async_result.id)
+    alerta_assimetria_critica = False
+    enqueued_celery = False
+
+    if payload.iniciar_processamento_automatico and is_redis_configured():
+        try:
+            async_result = processar_video_biomecanico.apply_async(args=[sessao.id], countdown=5)
+            celery_task_id = str(async_result.id)
+            sessao.redis_job_id = celery_task_id
+            enqueued_celery = True
+        except Exception as exc:
+            logger.warning(
+                "Redis/Celery indisponível para sessão %s; executando fallback inline: %s",
+                sessao.id,
+                exc,
+            )
+
+    if payload.iniciar_processamento_automatico and not enqueued_celery:
+        # Fallback síncrono seguro para ambientes gratuitos (ex.: Render sem Redis/Celery)
+        resultado = KinePitchVisionEngine.gerar_metricas_inline(
+            estatura_cm=float(atleta.estatura_cm),
+            massa_corporal_kg=float(atleta.massa_corporal_kg),
+            posicao=atleta.posicao_primaria.value,
+            velocidade_pico_kmh=payload.velocidade_pico_kmh if payload.velocidade_pico_kmh is not None else 31.4,
+            flexao_joelho_esq_graus=payload.flexao_joelho_esq_graus if payload.flexao_joelho_esq_graus is not None else 42.0,
+            flexao_joelho_dir_graus=payload.flexao_joelho_dir_graus if payload.flexao_joelho_dir_graus is not None else 38.0,
+            valgo_dinamico_graus=payload.valgo_dinamico_graus if payload.valgo_dinamico_graus is not None else 3.8,
+            altura_salto_cm=payload.altura_salto_cm if payload.altura_salto_cm is not None else 41.0,
+        )
+        celery_task_id = f"inline-{uuid.uuid4()}"
+        alerta_assimetria_critica = resultado.alerta_assimetria_critica
+
+        db.add(
+            MetricaBiomecanica(
+                sessao_id=sessao.id,
+                atleta_id=atleta.id,
+                frame_referencia=resultado.frame_referencia,
+                timestamp_segundos=Decimal(str(resultado.timestamp_segundos)),
+                ipb_prontidao_biomecanica=Decimal(str(resultado.ipb_prontidao_biomecanica)),
+                spe_potencia_explosao=Decimal(str(resultado.spe_potencia_explosao)),
+                ietp_eficiencia_tecnica=Decimal(str(resultado.ietp_eficiencia_tecnica)),
+                ips_potencial_scouting=Decimal(str(resultado.ips_potencial_scouting)),
+                pontos_opticos_22=resultado.pontos_opticos_22,
+                confianca_rastreamento_pct=Decimal(str(resultado.confianca_rastreamento_pct)),
+                flexao_joelho_esq_graus=Decimal(str(resultado.flexao_joelho_esq_graus)),
+                flexao_joelho_dir_graus=Decimal(str(resultado.flexao_joelho_dir_graus)),
+                extensao_joelho_chute_graus=Decimal(str(resultado.extensao_joelho_chute_graus)),
+                rotacao_quadril_graus=Decimal(str(resultado.rotacao_quadril_graus)),
+                inclinacao_pelvica_lateral_graus=Decimal(str(resultado.inclinacao_pelvica_lateral_graus)),
+                dorsiflexao_tornozelo_graus=Decimal(str(resultado.dorsiflexao_tornozelo_graus)),
+                valgo_dinamico_joelho_graus=Decimal(str(resultado.valgo_dinamico_joelho_graus)),
+                velocidade_pico_kmh=Decimal(str(resultado.velocidade_pico_kmh)),
+                velocidade_pe_chute_kmh=Decimal(str(resultado.velocidade_pe_chute_kmh)),
+                velocidade_bola_kmh=Decimal(str(resultado.velocidade_bola_kmh)),
+                split_0_10m_seg=Decimal(str(resultado.split_0_10m_seg)),
+                desaceleracao_max_ms2=Decimal(str(resultado.desaceleracao_max_ms2)),
+                vetor_grf_bw=Decimal(str(resultado.vetor_grf_bw)),
+                torque_articular_nm=Decimal(str(resultado.torque_articular_nm)),
+                velocidade_angular_joelho_graus_s=Decimal(str(resultado.velocidade_angular_joelho_graus_s)),
+                altura_salto_cm=Decimal(str(resultado.altura_salto_cm)),
+                rsi_reativo=Decimal(str(resultado.rsi_reativo)),
+                assimetria_bilateral_pct=Decimal(str(resultado.assimetria_bilateral_pct)),
+            )
+        )
+
         sessao.redis_job_id = celery_task_id
+        sessao.worker_gpu_node = "render-inline-biomech"
+        sessao.latencia_inferencia_ms = Decimal(str(resultado.latencia_inferencia_ms))
+        sessao.total_frames = resultado.total_frames
+        sessao.duracao_segundos = Decimal(str(resultado.duracao_segundos))
+        sessao.keyframes_criticos = resultado.keyframes_criticos
+        sessao.sintese_ia_texto = resultado.sintese_ia_texto
+        sessao.status_processamento = StatusProcessamentoEnum.concluida
+        sessao.progresso_percentual = 100
+        sessao.concluida_em = datetime.now(timezone.utc)
 
     _registrar_auditoria(
         db,
@@ -585,9 +790,22 @@ def solicitar_upload_e_enfileirar(
         entidade="sessoes_analise",
         entidade_id=str(sessao.id),
         ip_origem=request.client.host if request.client else None,
-        metadata={"codigo_sessao": codigo_sessao, "celery_task_id": celery_task_id},
+        metadata={
+            "codigo_sessao": codigo_sessao,
+            "celery_task_id": celery_task_id,
+            "modo": "celery_redis" if enqueued_celery else "inline_fallback",
+        },
     )
-    db.commit()
+
+    try:
+        db.commit()
+    except SQLAlchemyError as exc:
+        db.rollback()
+        logger.exception("Erro ao persistir sessão e métricas biomecânicas no PostgreSQL")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Falha ao gravar sessão biomecânica no banco de dados. Verifique os valores enviados.",
+        ) from exc
 
     return SessaoUploadAcceptedResponse(
         sessao_id=sessao.id,
@@ -598,6 +816,7 @@ def solicitar_upload_e_enfileirar(
         s3_bucket=storage.bucket_raw,
         s3_object_key=object_key,
         expira_em_segundos=expira_em,
+        alerta_assimetria_critica=alerta_assimetria_critica,
     )
 
 

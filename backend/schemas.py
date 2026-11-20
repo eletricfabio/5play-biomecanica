@@ -1,11 +1,48 @@
 from __future__ import annotations
 
+import math
 from datetime import date, datetime
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from typing import Any
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator
+
+
+def parse_locale_decimal(value: Any) -> Any:
+    """Converte strings numéricas com vírgula decimal (ex: '32,4', '1.234,56') antes da validação Pydantic."""
+    if value is None:
+        return None
+    if isinstance(value, bool):
+        raise ValueError("Valor booleano não é permitido para campo numérico.")
+    if isinstance(value, (int, float)):
+        if isinstance(value, float) and not math.isfinite(value):
+            raise ValueError("Valor numérico não pode ser NaN ou infinito.")
+        return value
+    if isinstance(value, Decimal):
+        if not value.is_finite():
+            raise ValueError("Valor numérico não pode ser NaN ou infinito.")
+        return value
+    if isinstance(value, str):
+        cleaned = value.strip().replace(" ", "")
+        if not cleaned:
+            return None
+        if "," in cleaned and "." in cleaned:
+            # Ex: "1.234,56" vs "1,234.56"
+            if cleaned.rfind(",") > cleaned.rfind("."):
+                cleaned = cleaned.replace(".", "").replace(",", ".")
+            else:
+                cleaned = cleaned.replace(",", "")
+        elif "," in cleaned:
+            cleaned = cleaned.replace(",", ".")
+        try:
+            dec = Decimal(cleaned)
+        except InvalidOperation as exc:
+            raise ValueError(f"Valor numérico inválido: '{value}'. Use formato como 32.4 ou 32,4.") from exc
+        if not dec.is_finite():
+            raise ValueError("Valor numérico não pode ser NaN ou infinito.")
+        return cleaned
+    return value
 
 from models import (
     CategoriaCompetitivaEnum,
@@ -104,6 +141,20 @@ class AtletaCreate(BaseModel):
 
     consentimento_lgpd: ConsentimentoLgpdInput | None = None
 
+    @field_validator(
+        "estatura_cm",
+        "massa_corporal_kg",
+        "envergadura_cm",
+        "altura_sentado_cm",
+        "percentual_gordura",
+        "mirwald_offset_anos",
+        "limiar_assimetria_graus",
+        mode="before",
+    )
+    @classmethod
+    def normalize_locale_numbers(cls, value: Any) -> Any:
+        return parse_locale_decimal(value)
+
 
 class AtletaOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
@@ -173,8 +224,8 @@ class LgpdOut(BaseModel):
 # UPLOAD & FILA ASSÍNCRONA (202 ACCEPTED)
 # ============================================================================
 class SessaoUploadRequest(BaseModel):
-    atleta_id: int
-    clube_id: int
+    atleta_id: int = Field(..., gt=0)
+    clube_id: int | None = Field(default=None, gt=0)
     tipo_teste: TipoTesteBiomecanicoEnum
     contexto: str = Field(default="treino", max_length=40)
     modo_captura: ModoCapturaEnum = ModoCapturaEnum.stereo_4k_60fps
@@ -182,8 +233,37 @@ class SessaoUploadRequest(BaseModel):
     resolucao: str = Field(default="4K", max_length=20)
     nome_arquivo: str = Field(..., min_length=3, max_length=240)
     content_type: str = Field(default="video/mp4")
-    distancia_estimada_m: Decimal | None = Field(default=Decimal("5.40"))
+    distancia_estimada_m: Decimal | None = Field(default=Decimal("5.40"), ge=Decimal("0.00"), le=Decimal("999.99"))
     iniciar_processamento_automatico: bool = True
+
+    velocidade_pico_kmh: float | None = Field(default=None, ge=0.0, le=50.0)
+    flexao_joelho_esq_graus: float | None = Field(default=None, ge=0.0, le=180.0)
+    flexao_joelho_dir_graus: float | None = Field(default=None, ge=0.0, le=180.0)
+    valgo_dinamico_graus: float | None = Field(default=None, ge=0.0, le=45.0)
+    altura_salto_cm: float | None = Field(default=None, ge=0.0, le=150.0)
+    acwr: float | None = Field(default=None, ge=0.0, le=5.0)
+
+    @field_validator("nome_arquivo")
+    @classmethod
+    def validate_nome_arquivo(cls, value: str) -> str:
+        cleaned = value.strip()
+        if len(cleaned) < 3:
+            raise ValueError("O nome do arquivo de vídeo deve ter pelo menos 3 caracteres.")
+        return cleaned
+
+    @field_validator(
+        "distancia_estimada_m",
+        "velocidade_pico_kmh",
+        "flexao_joelho_esq_graus",
+        "flexao_joelho_dir_graus",
+        "valgo_dinamico_graus",
+        "altura_salto_cm",
+        "acwr",
+        mode="before",
+    )
+    @classmethod
+    def normalize_locale_decimals(cls, value: Any) -> Any:
+        return parse_locale_decimal(value)
 
 
 class SessaoUploadAcceptedResponse(BaseModel):
@@ -195,6 +275,7 @@ class SessaoUploadAcceptedResponse(BaseModel):
     s3_bucket: str
     s3_object_key: str
     expira_em_segundos: int
+    alerta_assimetria_critica: bool = False
 
 
 class PontoOptico3D(BaseModel):

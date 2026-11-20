@@ -64,6 +64,16 @@ export function normalizeErrorText(value: unknown, fallback = 'Erro de comunica√
 
   if (value && typeof value === 'object') {
     const obj = value as Record<string, unknown>;
+    if (Array.isArray(obj.loc) && obj.msg !== undefined && obj.msg !== null) {
+      const fieldPath = obj.loc
+        .map((part) => String(part))
+        .filter((part) => part !== 'body' && part !== '')
+        .join('.');
+      const msgText = normalizeErrorText(obj.msg, '').replace(/^Value error,\s*/i, '');
+      if (msgText) {
+        return fieldPath ? `${fieldPath}: ${msgText}` : msgText;
+      }
+    }
     for (const key of ['detail', 'message', 'msg', 'error', 'title', 'statusText']) {
       if (obj[key] !== undefined && obj[key] !== null) {
         const nested = normalizeErrorText(obj[key], '');

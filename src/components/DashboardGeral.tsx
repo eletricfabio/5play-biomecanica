@@ -37,6 +37,28 @@ interface DashboardGeralProps {
   onCountsChange?: (counts: { atletas: number; sessoes: number }) => void;
 }
 
+function parseLocaleDecimal(raw: string): number | null {
+  const cleaned = raw.trim().replace(/\s+/g, '');
+  if (!cleaned) return null;
+
+  let normalized = cleaned;
+  if (cleaned.includes(',') && cleaned.includes('.')) {
+    normalized =
+      cleaned.lastIndexOf(',') > cleaned.lastIndexOf('.')
+        ? cleaned.replace(/\./g, '').replace(',', '.')
+        : cleaned.replace(/,/g, '');
+  } else if (cleaned.includes(',')) {
+    normalized = cleaned.replace(',', '.');
+  }
+
+  if (!/^[+-]?\d+(\.\d+)?$/.test(normalized)) {
+    return null;
+  }
+
+  const num = Number(normalized);
+  return Number.isFinite(num) ? num : null;
+}
+
 export function DashboardGeral({
   isAuthenticated,
   onSignIn,
@@ -156,15 +178,63 @@ export function DashboardGeral({
       .join(' ');
   }, [sessoes]);
 
+  const selectedAtletaUpload = useMemo(
+    () => atletas.find((a) => a.id === Number(uploadForm.atleta_id)) ?? null,
+    [atletas, uploadForm.atleta_id]
+  );
+
   const handleEnqueueSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setUploadError(null);
     setUploadResult(null);
-    const atletaObj = atletas.find((a) => a.id === Number(uploadForm.atleta_id));
+    const atletaObj = selectedAtletaUpload;
     if (!atletaObj) {
       setUploadError('Selecione um atleta válido.');
       return;
     }
+    if (!atletaObj.apto_avaliacao_3d) {
+      setUploadError(
+        `Captura 3D bloqueada: ${atletaObj.nome_completo} possui termo LGPD pendente ou revogado. Autorize o termo em Cadastro & Elenco.`
+      );
+      return;
+    }
+
+    const nomeArquivo = uploadForm.nome_arquivo.trim();
+    if (nomeArquivo.length < 3) {
+      setUploadError('Informe um nome de arquivo de vídeo válido (mínimo 3 caracteres).');
+      return;
+    }
+
+    const numericSpecs: Array<{
+      label: string;
+      raw: string;
+      min: number;
+      max: number;
+    }> = [
+      { label: 'Velocidade Pico (km/h)', raw: uploadForm.velocidade_pico_kmh, min: 0, max: 50 },
+      { label: 'Flexão Joelho Esq (°)', raw: uploadForm.flexao_joelho_esq_graus, min: 0, max: 180 },
+      { label: 'Flexão Joelho Dir (°)', raw: uploadForm.flexao_joelho_dir_graus, min: 0, max: 180 },
+      { label: 'Valgo Dinâmico (°)', raw: uploadForm.valgo_dinamico_graus, min: 0, max: 45 },
+      { label: 'Salto CMJ (cm)', raw: uploadForm.altura_salto_cm, min: 0, max: 150 },
+      { label: 'ACWR', raw: uploadForm.acwr, min: 0, max: 5 },
+    ];
+
+    const parsedValues: number[] = [];
+    for (const spec of numericSpecs) {
+      const val = parseLocaleDecimal(spec.raw);
+      if (val === null) {
+        setUploadError(`Valor inválido para "${spec.label}". Use números como 32,4 ou 32.4.`);
+        return;
+      }
+      if (val < spec.min || val > spec.max) {
+        setUploadError(`"${spec.label}" deve estar entre ${spec.min} e ${spec.max}.`);
+        return;
+      }
+      parsedValues.push(val);
+    }
+
+    const [velocidadePico, flexaoEsq, flexaoDir, valgoDinamico, alturaSalto, acwrVal] = parsedValues;
+
     setUploading(true);
     try {
       const resp = await enqueueSessaoUploadApi({
@@ -172,13 +242,13 @@ export function DashboardGeral({
         clube_id: atletaObj.clube_id,
         tipo_teste: uploadForm.tipo_teste,
         modo_captura: uploadForm.modo_captura,
-        nome_arquivo: uploadForm.nome_arquivo,
-        velocidade_pico_kmh: Number(uploadForm.velocidade_pico_kmh),
-        flexao_joelho_esq_graus: Number(uploadForm.flexao_joelho_esq_graus),
-        flexao_joelho_dir_graus: Number(uploadForm.flexao_joelho_dir_graus),
-        valgo_dinamico_graus: Number(uploadForm.valgo_dinamico_graus),
-        altura_salto_cm: Number(uploadForm.altura_salto_cm),
-        acwr: Number(uploadForm.acwr),
+        nome_arquivo: nomeArquivo,
+        velocidade_pico_kmh: velocidadePico,
+        flexao_joelho_esq_graus: flexaoEsq,
+        flexao_joelho_dir_graus: flexaoDir,
+        valgo_dinamico_graus: valgoDinamico,
+        altura_salto_cm: alturaSalto,
+        acwr: acwrVal,
       });
       setUploadResult(resp);
       await loadAll();
@@ -805,12 +875,31 @@ export function DashboardGeral({
                   </div>
                 </div>
 
+                {selectedAtletaUpload && !selectedAtletaUpload.apto_avaliacao_3d && (
+                  <div className="bg-[#F59E0B]/10 border border-[#F59E0B]/40 rounded p-3 flex flex-wrap items-center justify-between gap-2 text-[#FCD34D]">
+                    <span>
+                      LGPD pendente ou revogado para {selectedAtletaUpload.nome_completo}. Valide o termo antes de iniciar a captura 3D.
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowUploadModal(false);
+                        onNavigateView('cadastro');
+                      }}
+                      className="text-[#F9FAFB] underline font-semibold cursor-pointer whitespace-nowrap"
+                    >
+                      Validar LGPD em Cadastro
+                    </button>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   <div>
                     <label className="block text-[#9CA3AF] mb-1">Velocidade Pico (km/h)</label>
                     <input
-                      type="number"
-                      step="0.1"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="Ex: 32,4"
                       value={uploadForm.velocidade_pico_kmh}
                       onChange={(e) =>
                         setUploadForm({ ...uploadForm, velocidade_pico_kmh: e.target.value })
@@ -821,8 +910,9 @@ export function DashboardGeral({
                   <div>
                     <label className="block text-[#9CA3AF] mb-1">Flexão Joelho Esq (°)</label>
                     <input
-                      type="number"
-                      step="0.5"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="Ex: 44"
                       value={uploadForm.flexao_joelho_esq_graus}
                       onChange={(e) =>
                         setUploadForm({ ...uploadForm, flexao_joelho_esq_graus: e.target.value })
@@ -833,8 +923,9 @@ export function DashboardGeral({
                   <div>
                     <label className="block text-[#9CA3AF] mb-1">Flexão Joelho Dir (°)</label>
                     <input
-                      type="number"
-                      step="0.5"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="Ex: 39"
                       value={uploadForm.flexao_joelho_dir_graus}
                       onChange={(e) =>
                         setUploadForm({ ...uploadForm, flexao_joelho_dir_graus: e.target.value })
@@ -845,8 +936,9 @@ export function DashboardGeral({
                   <div>
                     <label className="block text-[#9CA3AF] mb-1">Valgo Dinâmico (°)</label>
                     <input
-                      type="number"
-                      step="0.1"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="Ex: 3,6"
                       value={uploadForm.valgo_dinamico_graus}
                       onChange={(e) =>
                         setUploadForm({ ...uploadForm, valgo_dinamico_graus: e.target.value })
@@ -857,8 +949,9 @@ export function DashboardGeral({
                   <div>
                     <label className="block text-[#9CA3AF] mb-1">Salto CMJ (cm)</label>
                     <input
-                      type="number"
-                      step="0.5"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="Ex: 43"
                       value={uploadForm.altura_salto_cm}
                       onChange={(e) =>
                         setUploadForm({ ...uploadForm, altura_salto_cm: e.target.value })
@@ -869,8 +962,9 @@ export function DashboardGeral({
                   <div>
                     <label className="block text-[#9CA3AF] mb-1">ACWR</label>
                     <input
-                      type="number"
-                      step="0.01"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="Ex: 1,08"
                       value={uploadForm.acwr}
                       onChange={(e) => setUploadForm({ ...uploadForm, acwr: e.target.value })}
                       className="w-full px-3 py-2 bg-[#0B0F17] border border-[#1F2937] rounded-md text-[#F9FAFB] font-mono-tabular"
@@ -887,11 +981,16 @@ export function DashboardGeral({
                 {uploadResult && (
                   <div className="bg-[#10B981]/10 border border-[#10B981]/40 rounded p-3 space-y-1.5 text-[#D1FAE5]">
                     <div className="font-semibold">
-                      202 Accepted · Sessão {uploadResult.codigo_sessao} processada
+                      202 Accepted · Sessão {uploadResult.codigo_sessao} ({uploadResult.status_processamento})
                     </div>
                     <div className="font-mono-tabular text-[11px] break-all">
-                      Task Redis/Celery: {uploadResult.celery_task_id}
+                      Task: {uploadResult.celery_task_id || 'Processamento inline concluído'}
                     </div>
+                    {uploadResult.alerta_assimetria_critica && (
+                      <div className="text-[#FCD34D] text-[11px] font-medium">
+                        Alerta: assimetria bilateral acima de 15% detectada nesta sessão.
+                      </div>
+                    )}
                     <div className="pt-1">
                       <button
                         type="button"

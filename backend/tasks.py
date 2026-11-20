@@ -25,7 +25,13 @@ from models import (
 from storage import ObjectStorageClient
 from vision_engine import KinePitchVisionEngine
 
-REDIS_URL = os.getenv("REDIS_URL", "redis://:changeme_redis_dev@localhost:6379/0")
+RAW_REDIS_URL = os.getenv("REDIS_URL", "").strip()
+REDIS_URL = RAW_REDIS_URL or "redis://:changeme_redis_dev@localhost:6379/0"
+
+
+def is_redis_configured() -> bool:
+    return bool(RAW_REDIS_URL)
+
 
 celery_app = Celery(
     "kinepitch_worker",
@@ -41,6 +47,14 @@ celery_app.conf.update(
     enable_utc=True,
     task_acks_late=True,
     worker_prefetch_multiplier=1,
+    broker_connection_retry=False,
+    broker_connection_retry_on_startup=False,
+    broker_transport_options={
+        "socket_connect_timeout": 2,
+        "socket_timeout": 2,
+        "retry_on_timeout": False,
+        "max_retries": 0,
+    },
 )
 
 
